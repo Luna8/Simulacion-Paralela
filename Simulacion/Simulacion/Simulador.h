@@ -44,8 +44,7 @@ public:
 
 	// EFE: crea la cantidad indicada de tortugas y las inicializa usando la distribución normal 
 	// con el promedio y desviación dados para la velocidad.
-	void inicializarTortugas(int cantidad, double velocidad_promedio, double dsv_std_velocidad);
-
+	void inicializarTortugas(ifstream comportamiento_tortugas);
 	// REQ: cantidad >= 3.
 	// EFE: crea la cantidad indicada de contadores y los inicializa usando la distribución normal 
 	// con el promedio y desviación dados para la velocidad. Si cantidad > 3, los distribuye a partes
@@ -116,7 +115,7 @@ void Simulador::inicializarTransectoBerma(int ancho, int largo)
 {
 }
 
-void Simulador::inicializarTortugas(int cantidad, double velocidad_promedio, double dsv_std_velocidad)
+void Simulador::inicializarTortugas(ifstream comportamiento_tortugas)
 {
 }
 

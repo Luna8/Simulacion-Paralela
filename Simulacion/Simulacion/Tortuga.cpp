@@ -55,12 +55,13 @@ void Tortuga::asgEstado(EstadoTortuga ne)
 // EFE: avanza *this según su velocidad y evoluciona su estado en el tic que le toque.
 // En cada avance la tortuga debe avanzar en dirección a la berma.
 //Avanza, evalúa si 
-//La tortuga sale del mar y se genera entonces un tiempo estimado usando la distribución uniforme
+//La tortuga sale del mar y se genera entonces un tiempo estimado usando la distribución normal
 //Luego de generar ese tiempo estimado entonces la tortuga durante ese rato hace las acciones que vaya a realizar 
 //Se proponen dos formas: distribuir de forma uniforme le tiempo entre las diferentes acciones
 //generar valores random y que todos sumen el tiempo completo 
 
 void Tortuga::avanzar(int tic)
 {
-
+	double number = distribution(generator);
+		
 }

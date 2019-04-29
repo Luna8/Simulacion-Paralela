@@ -35,6 +35,7 @@ private:
 	double velocidad;
 	T_posicion posicion; // posicion.first == coordenada X, posicion.second = coordenada Y
 	EstadoContador estado;
+	int tiempoEspera;
 };
 
 Contador::Contador()

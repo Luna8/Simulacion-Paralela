@@ -1,6 +1,7 @@
 #pragma once
 
 #include <utility>
+#include <random>
 using namespace std;
 
 class Tortuga
@@ -31,10 +32,15 @@ public:
 	// EFE: avanza *this según su velocidad y evoluciona su estado en el tic que le toque.
 	void avanzar(int tic);
 
+	// Aquí se definirán los parámetros de las distribuciones
+	void definirDistribuciones();
+
 private:
 	double velocidad;
 	T_posicion posicion; // posicion.first == coordenada X, posicion.second = coordenada Y
 	EstadoTortuga estado;
+	std::default_random_engine generator;
+	std::normal_distribution<double> distribution(5.0, 2.0);
 };
 
 Tortuga::Tortuga()
@@ -78,4 +84,7 @@ void Tortuga::asgEstado(EstadoTortuga ne)
 
 void Tortuga::avanzar(int tic)
 {
+}
+
+void Tortuga::definirDistribuciones() {
 }

@@ -58,9 +58,29 @@ void Contador::asgEstado(EstadoContador ne)
 //El de los cuadrados no se mueve
 //El de la vara vertical no se mueve 
 //El de la trasversal horizontal si se va a ir moviendo de forma paralela al mar 
- 
+ //Cada contador avanza 6km por hora
+//El contador avanza y cuenta a la vez por 15min pues son 1500m en total toda la playa
+//y al finalizar espera por 20 minutos y luego vuelve a empezar.
 void Contador::avanzar(int tic)
 {
+	//Avanza 100mts por minuto (Pues su v=6km/h constante)
+	//Cuenta cada 20 min
+	if (posicion.first == 1000) {
+		estado = esperar;
+		posicion.first = 0;
+		tiempoEspera = 0;
+	}
+	if (tiempoEspera == 20) {
+		estado = contar;
+		posicion.first += 100;
+	}
+	else
+	{
+		tiempoEspera += 1;
+	}
+	if (estado == contar) {
+		posicion.first += 100;
+	}
 
 }
 
