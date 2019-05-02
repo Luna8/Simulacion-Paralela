@@ -26,42 +26,37 @@ public:
 	// Objeto compartido que genera números entre 0.0 y 1.0 al azar según la distribución uniforme
 	static uniform_real_distribution<double> random_uniform;
 
-	/* 
-	* INICIALIZADORES DE SIMULACIÓN 
+	/*
+	* INICIALIZADORES DE SIMULACIÓN
 	*/
 
 	// EFE:inicializa las secciones en que se divide la playa con los datos en el archivo.
-	void inicializarPlaya(ifstream arch_secciones);
+	void inicializarPlaya(ifstream& arch_secciones);
 
 	// EFE: inicializa los cuadrantes con los datos en el archivo.
-	void inicializarCuadrantes(ifstream arch_cuadrantes);
+	//		Crea e inicializa los contadores correspondientes.
+	void inicializarCuadrantes(ifstream& arch_cuadrantes);
 
 	// EFE: inicializa los transectos verticales sobre la berma con los datos en el archivo.
-	void inicializarTransectosVerticales(ifstream arch_transectos_verticales);
+	//		Crea e inicializa los contadores correspondientes.
+	void inicializarTransectosVerticales(ifstream& arch_transectos_verticales);
 
 	// EFE: inicializa el transecto paralelo a la berma con el ancho y largo indicado.
-	void inicializarTransectoBerma(int ancho, int largo);
+	//		Crea e inicializa los contadores correspondientes.
+	void inicializarTransectoBerma(ifstream& transecto_paralelo_berma);
 
 	// EFE: crea la cantidad indicada de tortugas y las inicializa usando la distribución normal 
 	// con el promedio y desviación dados para la velocidad.
-	void inicializarTortugas(int cantidad, double velocidad_promedio, double dsv_std_velocidad);
-
-	// REQ: cantidad >= 3.
-	// EFE: crea la cantidad indicada de contadores y los inicializa usando la distribución normal 
-	// con el promedio y desviación dados para la velocidad. Si cantidad > 3, los distribuye a partes
-	// iguales entre cada método de estimación ubicándolos en la posición inicial apropiada a cada
-	// método de estimación.
-	// NOTA: se supone que hay al menos un contador para cada método de estimación.
-	void inicializarContadores(int cantidad, double velocidad_promedio, double dsv_std_velocidad);
+	void inicializarTortugas(int cantidad_tortugas);
 
 	// EFE: distribuye la cantidad total de tortugas que arriban, minuto a minuto, durante 360 
 	// minutos o 6 horas, siguiendo la distribución logística con parámetros u y s.
-	void inicializarArribada(double u, double s);
+	void inicializarArribada(ifstream& comportamiento_tortugas);
 
 	// EFE: guarda los parámetros de la función sinusoidal que se usa para generar la altura de la 
 	// marea minuto a minuto por 360 minutos o 6 horas.
 	// NOTA: se debe usar modelo sinusoidal con periodo en minutos.
-	void inicializarMarea(double baja, double alta, int periodo);
+	void inicializarMarea(ifstream& marea);
 
 	// REQ: total_tics <= 360.
 	// EFE: simula el movimiento de las tortugas y el conteo de los contadores durante 6 horas.
@@ -100,35 +95,32 @@ Simulador::~Simulador()
 {
 }
 
-void Simulador::inicializarPlaya(ifstream arch_secciones)
+void Simulador::inicializarPlaya(ifstream& arch_secciones)
 {
 }
 
-void Simulador::inicializarCuadrantes(ifstream arch_cuadrantes)
+void Simulador::inicializarCuadrantes(ifstream& arch_cuadrantes)
 {
 }
 
-void Simulador::inicializarTransectosVerticales(ifstream arch_transectos_verticales)
+void Simulador::inicializarTransectosVerticales(ifstream& arch_transectos_verticales)
 {
 }
 
-void Simulador::inicializarTransectoBerma(int ancho, int largo)
+void Simulador::inicializarTransectoBerma(ifstream& transecto_paralelo_berma)
 {
 }
 
-void Simulador::inicializarTortugas(int cantidad, double velocidad_promedio, double dsv_std_velocidad)
+void Simulador::inicializarTortugas(int cantidad_tortugas)
+{
+
+}
+
+void Simulador::inicializarArribada(ifstream& comportamiento_tortugas)
 {
 }
 
-void Simulador::inicializarContadores(int cantidad, double velocidad_promedio, double dsv_std_velocidad)
-{
-}
-
-void Simulador::inicializarArribada(double u, double s)
-{
-}
-
-void Simulador::inicializarMarea(double baja, double alta, int periodo)
+void Simulador::inicializarMarea(ifstream& marea)
 {
 }
 
