@@ -62,6 +62,8 @@ void Tortuga::asgEstado(EstadoTortuga ne)
 
 void Tortuga::avanzar(int tic)
 {
-	double number = distribution(generator);
+	//REVISAR				
+	posicion.second += velocidad * 16.6;
+
 		
 }
