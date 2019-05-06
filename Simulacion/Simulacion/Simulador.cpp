@@ -81,9 +81,36 @@ void Simulador::inicializarTransectoBerma(ifstream arch_transecto_paralelo)
 
 	}
 }
+
 //ALLEN
+// EFE: crea la cantidad indicada de tortugas y las inicializa usando la distribución normal 
+// con el promedio y desviación dados para la velocidad.
 void Simulador::inicializarTortugas(ifstream comportamiento_tortugas)
 {
+	bool lecturaCorrecta = validarDatos(comportamiento_tortugas);
+	if (lecturaCorrecta) {
+		//Inicializar valores del vector tortugas desde el archivo "comportamiento_tortugas"
+		vector< T > tortugas = cargarDatos(comportamiento_tortugas);
+		vagar = tortugas[0];
+		camar = tortugas[1];
+		excavar = tortugas[2];
+		poner = tortugas[3];
+		tapar = tortugas[4];
+		camuflar = tortugas[5];
+		velocidadPromEst = tortugas[6]; //Velocidad promedio estimada
+		desviacionEstVelocidad = tortugas[8]; //desviación estándar de la velocidad
+		sEscala = tortugas[9]; //Parámetro s (escala) para la distribución logística de la arribada.
+		duracionPromedio = tortugas[10]; //Duración promedio de minutos desde “camar” hasta “camuflar”
+		desviacionEstDuracion = tortugas[11]; //Desviación estándar de la duración promedio entre “camar” y “camuflar”
+		//El parámetro u (mi) debe ser igual a cero
+
+		//Inicializar tortugas
+		//vector<Tortuga> vectorTortugas; Global?
+		for (int i = 0; i < cantidadTortugas; i++) {
+			velocidadT = distribucionNormal(); //distribucionNormal() (?)
+			vectorTortugas[i].asgVelocidad(velocidadT);
+		}
+	}
 }
 
 //ANA
@@ -92,18 +119,31 @@ void Simulador::inicializarContadores(int cantidad, double velocidad_promedio, d
 }
 
 //ALLEN
+// EFE: distribuye la cantidad total de tortugas que arriban, minuto a minuto, durante 360 
+// minutos o 6 horas, siguiendo la distribución logística con parámetros u y s.
 void Simulador::inicializarArribada(double u, double s)
 {
+	/*vector<T> vectorArribada; Global (?) Contiene X y Y de tortugas, además del tic en que aparece (?)
+	vectorArribada[0] = posicionX
+	vectorArribada[1] = posicionY
+	vectorArribada[2] = ticAparicion*/
+	for (int i = 0; i < cantidadTortugas; i++) {
+		vectorArribada = distribucionLogistica(); //En el caso que la función de las posiciones y el tic de aparición
+	}
 }
 
 //ANA
-
 void Simulador::inicializarMarea(double baja, double alta, int periodo)
 {
 }
 
 void Simulador::simular(int total_tics)
 {
+	/*
+	For paralelizado en donde el i son cada tic durante las 6 horas (?)
+	Debe trabajar con inicializarArribada y inicializarMarea ya que estas trabajan cada tic (?)
+	Le pasa los i (tics) a Avanzar de Tortuga y Contador, además de inicializarMarea (?)
+	*/
 }
 
 long Simulador::obtTotalTortugasArribaron()
