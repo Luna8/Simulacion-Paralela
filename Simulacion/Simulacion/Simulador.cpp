@@ -2,9 +2,6 @@
 
 Simulador::Simulador()
 {
-
-
-
 }
 
 
@@ -91,23 +88,34 @@ void Simulador::inicializarTortugas(ifstream comportamiento_tortugas)
 	if (lecturaCorrecta) {
 		//Inicializar valores del vector tortugas desde el archivo "comportamiento_tortugas"
 		vector< T > tortugas = cargarDatos(comportamiento_tortugas);
-		vagar = tortugas[0];
-		camar = tortugas[1];
-		excavar = tortugas[2];
-		poner = tortugas[3];
-		tapar = tortugas[4];
-		camuflar = tortugas[5];
-		velocidadPromEst = tortugas[6]; //Velocidad promedio estimada
-		desviacionEstVelocidad = tortugas[8]; //desviación estándar de la velocidad
-		sEscala = tortugas[9]; //Parámetro s (escala) para la distribución logística de la arribada.
-		duracionPromedio = tortugas[10]; //Duración promedio de minutos desde “camar” hasta “camuflar”
-		desviacionEstDuracion = tortugas[11]; //Desviación estándar de la duración promedio entre “camar” y “camuflar”
+		double vagar = tortugas[0];
+		double camar = tortugas[1];
+		double excavar = tortugas[2];
+		double poner = tortugas[3];
+		double tapar = tortugas[4];
+		double camuflar = tortugas[5];
+		double velocidadPromEst = tortugas[6]; //Velocidad promedio estimada
+		double desviacionEstVelocidad = tortugas[8]; //desviación estándar de la velocidad
+		double sEscala = tortugas[9]; //Parámetro s (escala) para la distribución logística de la arribada.
+		double duracionPromedio = tortugas[10]; //Duración promedio de minutos desde “camar” hasta “camuflar”
+		double desviacionEstDuracion = tortugas[11]; //Desviación estándar de la duración promedio entre “camar” y “camuflar”
 		//El parámetro u (mi) debe ser igual a cero
 
+		//Almacenamiento de tortugas: Vector, Lista, Diccionario???
+		//Vamos a seleccionar un vector cuyo índice va a ser su "id"
+		
+		//Inicializar vector con cantidad adecuada;
+
+		std::default_random_engine generator;
+		std::normal_distribution<double> distribucionNormal(velocidadPromEst, desviacionEstVelocidad);
+
+		double number = distribucionNormal(generator);
+		double velocidadT;
+			
 		//Inicializar tortugas
 		//vector<Tortuga> vectorTortugas; Global?
 		for (int i = 0; i < cantidadTortugas; i++) {
-			velocidadT = distribucionNormal(); //distribucionNormal() (?)
+			velocidadT = distribucionNormal(generator); //distribucionNormal() (?)
 			vectorTortugas[i].asgVelocidad(velocidadT);
 		}
 	}
@@ -123,12 +131,20 @@ void Simulador::inicializarContadores(int cantidad, double velocidad_promedio, d
 // minutos o 6 horas, siguiendo la distribución logística con parámetros u y s.
 void Simulador::inicializarArribada(double u, double s)
 {
+	std::default_random_engine generator;
+	std::uniform_real_distribution<double> random_uniform(0.0, 1.0);
+	//Entre línea de la marea baja y línea de marea en el tic en que está entrando la tortuga a la playa
+	std::uniform_real_distribution<double> distributionP(0.0, 1.0);
+
+	
 	/*vector<T> vectorArribada; Global (?) Contiene X y Y de tortugas, además del tic en que aparece (?)
 	vectorArribada[0] = posicionX
 	vectorArribada[1] = posicionY
 	vectorArribada[2] = ticAparicion*/
 	for (int i = 0; i < cantidadTortugas; i++) {
 		vectorArribada = distribucionLogistica(); //En el caso que la función de las posiciones y el tic de aparición
+		double  randomTic = Aleatorizador::random_logistic(u, s);
+
 	}
 }
 
@@ -223,3 +239,22 @@ vector< vector< T > > Simulador::cargarDatos(ifstream archivo) {
 	return valores;
 
 }
+
+
+//PARALELIZACIÓN
+/* Hay diferentes formas de paralelizar
+	Hsay que encontrar la cantidad de tortugas que hay en una zona en cada tic
+	esto es lo que hay que optimizar sin el inconveniente de la matriz playa
+	En cada sector controlar las tortugas de ese sector 
+	Hay que mover las tortugas, tienen que haer hiloscontrolandolas
+	pero hay que distribuir las tortugas entre los hilos correctamente
+	Es más fácil que cada tortuga pregunte solo a las de su sector si están en la misma pisicion
+	Paralelizar poniendo al menos un hilo por sector
+	Dividir hilos por sector y que un hilo se encargue de las tortugas de un sector
+	CONTEO
+	Forma en que recuperamos la cantidad de tortugas tiene que ser de forma eficiente
+	Dividir hilos de tortugas de hilos de contadores
+	Sabemos desde el inicio si la tortuga cayó en uno de los sectores en los que se cuenta o no
+	entonces solo se deben contemplar esas tortugas.
+
+*/

@@ -40,7 +40,7 @@ public:
 	void inicializarTransectosVerticales(ifstream arch_transectos_verticales);
 
 	// EFE: inicializa el transecto paralelo a la berma con el ancho y largo indicado.
-	void inicializarTransectoBerma(int ancho, int largo);
+	void inicializarTransectoBerma(ifstream arch_transecto_paralelo);
 
 	// EFE: crea la cantidad indicada de tortugas y las inicializa usando la distribución normal 
 	// con el promedio y desviación dados para la velocidad.
@@ -86,7 +86,20 @@ public:
 	// RET: estimación del total de tortugas que anidaron con base en el método de cuadrantes.
 	double obtEstimacionXcuadrantes();
 
+	bool validarDatos(ifstream archivo);
+
+	template < typename T, class F >
+	vector< vector< T > > cargarDatos(ifstream archivo);
+	vector<Tortuga> vectorTortugas;
+
 private:
+	int tiempoCuadrante;
+	int tiempoVertical;
+	int cantidadContadores;
+	int tiempoParalelo;
+	int rangoVision;
+	int anchoParalelo;
+	int largoParalelo;
 
 };
 
@@ -111,7 +124,7 @@ void Simulador::inicializarTransectosVerticales(ifstream arch_transectos_vertica
 {
 }
 
-void Simulador::inicializarTransectoBerma(int ancho, int largo)
+void Simulador::inicializarTransectoBerma(ifstream arch_transecto_paralelo)
 {
 }
 
@@ -167,4 +180,13 @@ double Simulador::random_logistic(double location, double scale)
 	assert(scale > 0.);
 	assert(location >= 0.);
 	return location - scale * log(1. / random_uniform(generator) - 1.);
+}
+
+bool Simulador::validarDatos(ifstream archivo) {
+
+}
+
+vector< vector< T > > Simulador::cargarDatos(ifstream archivo) {
+
+
 }
