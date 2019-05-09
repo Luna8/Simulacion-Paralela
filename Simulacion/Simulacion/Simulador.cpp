@@ -22,7 +22,7 @@ void Simulador::inicializarPlaya(ifstream arch_secciones)
 	//FALTA FUNCION VALIDARDATOS Y CARGARDATOS
 	bool lecturaCorrecta = validarDatos(arch_secciones);
 	if (lecturaCorrecta){
-		vector< vector< T > > secciones = cargarDatos(arch_secciones);
+		secciones = cargarDatos(arch_secciones);
 		for (size_t i = 1; i < secciones.size(); i++)
 		{
 			secciones[i][0] += secciones[i-1][0];
@@ -41,8 +41,9 @@ void Simulador::inicializarCuadrantes(ifstream arch_cuadrantes)
 	//Y SD
 	bool lecturaCorrecta = validarDatos(arch_cuadrantes);
 	if (lecturaCorrecta) {
-		vector< vector< T > > cuadrantes = cargarDatos(arch_secciones);
+		cuadrantes = cargarDatos(arch_secciones);
 		tiempoCuadrante = cuadrantes[0][1];
+		cantidadContadoresC = cuadrantes[0][0]:
 		cuadrantes.erase(cuadrantes.begin());
 		
 	}
@@ -59,7 +60,7 @@ void Simulador::inicializarTransectosVerticales(ifstream arch_transectos_vertica
 	if (lecturaCorrecta) {
 		vector< vector< T > > verticales = cargarDatos(arch_transectos_verticales);
 		tiempoVertical = verticales[0][1];
-		cantidadContadores = verticales[0][0];
+		cantidadContadoresV = verticales[0][0];
 		verticales.erase(verticales.begin());
 
 	}
@@ -115,15 +116,54 @@ void Simulador::inicializarTortugas(ifstream comportamiento_tortugas)
 		//Inicializar tortugas
 		//vector<Tortuga> vectorTortugas; Global?
 		for (int i = 0; i < cantidadTortugas; i++) {
-			velocidadT = distribucionNormal(generator); //distribucionNormal() (?)
+			velocidadT = distribucionNormal(generator);
 			vectorTortugas[i].asgVelocidad(velocidadT);
 		}
 	}
 }
 
 //ANA
+// REQ: cantidad >= 3.
+	// EFE: crea la cantidad indicada de contadores y los inicializa usando la distribución normal 
+	// con el promedio y desviación dados para la velocidad. Si cantidad > 3, los distribuye a partes
+	// iguales entre cada método de estimación ubicándolos en la posición inicial apropiada a cada
+	// método de estimación.
+	// NOTA: se supone que hay al menos un contador para cada método de estimación.
 void Simulador::inicializarContadores(int cantidad, double velocidad_promedio, double dsv_std_velocidad)
 {
+	if (cantidad > 3) {
+		std::default_random_engine generator;
+		std::normal_distribution<double> distribucionNormal(velocidad_promedio, dsv_std_velocidad);
+
+		double number = distribucionNormal(generator);
+		double velocidadC;
+		//Asignamos velocidades aleatorias para cada contador
+		for (int i = 0; i < cantidad; i++)
+		{
+			velocidadC = distribucionNormal(generator); 
+			vectorContadores[i].asgVelocidad(velocidadC);
+		}
+		//Ahora los asignamos a su posición inicial y el tipo
+		vectorContadores[0].tipo = Contador::horizontal;
+		vectorContadores[0].posicion.first = 0;
+		vectorContadores[0].posicion.second = 0;
+		
+		for (int i = 1; i < cantidadContadoresV; i++) {
+			vectorContadores[i].tipo = Contador::vertical;
+			vectorContadores[i].posicion.first = sectorV
+		}
+
+		for (int i = (cantidadContadoresV+1); i < cantidadContadoresC+cantidadContadoresV+1; i++) {
+			vectorContadores[i].tipo = Contador::cuadrante;
+		}
+
+
+
+
+	}
+	else {
+		cout << "Cantidad de contadores menor a la mínima" << endl;
+	}
 }
 
 //ALLEN
@@ -149,6 +189,9 @@ void Simulador::inicializarArribada(double u, double s)
 }
 
 //ANA
+// EFE: guarda los parámetros de la función sinusoidal que se usa para generar la altura de la
+// marea minuto a minuto por 360 minutos o 6 horas.
+// NOTA: se debe usar modelo sinusoidal con periodo en minutos.
 void Simulador::inicializarMarea(double baja, double alta, int periodo)
 {
 }
@@ -188,7 +231,7 @@ double Simulador::obtEstimacionXcuadrantes()
 }
 
 default_random_engine Simulador::generator; // inicialización de la variable static
-uniform_real_distribution<double> Simulador::random_uniform(0.0, 1.0); // inicialización de la variable static
+uniform_real_distribution<double> Simulador::random_uniform(0.0 , 1.0); // inicialización de la variable static
 double Simulador::random_logistic(double location, double scale)
 {
 	assert(scale > 0.);

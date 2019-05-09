@@ -90,12 +90,18 @@ public:
 
 	template < typename T, class F >
 	vector< vector< T > > cargarDatos(ifstream archivo);
+	vector< vector< double > > secciones;		//wtf?
+	vector< vector< double > > cuadrantes;
 	vector<Tortuga> vectorTortugas;
+	vector<Contador> vectorContadores;
+	
+
 
 private:
 	int tiempoCuadrante;
 	int tiempoVertical;
-	int cantidadContadores;
+	int cantidadContadoresV;
+	int cantidadContadoresC;
 	int tiempoParalelo;
 	int rangoVision;
 	int anchoParalelo;

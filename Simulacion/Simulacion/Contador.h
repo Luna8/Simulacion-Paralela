@@ -9,6 +9,8 @@ public:
 	
 	enum EstadoContador { contar, esperar };
 	typedef pair< int, int > T_posicion;
+	//Se añade el tipo de contador a cada uno 
+	enum TipoContador {cuadrante, vertical, horizontal};
 
 	// Construye un contador con velocidad 1.0, en posicion (0,0), en estado esperar.
 	Contador();
@@ -22,11 +24,13 @@ public:
 	double obtVelocidad();
 	T_posicion obtPosicion();
 	EstadoContador obtEstado();
+	TipoContador obtTipoContador();
 
 	// Asignadores:
 	void asgVelocidad(double nv);
 	void asgPosicion(T_posicion np);
 	void asgEstado(EstadoContador ne);
+	void asgTipoContador(TipoContador nt);
 
 	// EFE: avanza *this según su velocidad y evoluciona su estado en el tic que le toque.
 	void avanzar(int tic);
@@ -36,6 +40,7 @@ private:
 	T_posicion posicion; // posicion.first == coordenada X, posicion.second = coordenada Y
 	EstadoContador estado;
 	int tiempoEspera;
+	TipoContador tipo;
 };
 
 Contador::Contador()
@@ -65,6 +70,10 @@ Contador::EstadoContador Contador::obtEstado()
 {
 	return esperar; // agregue su propio codigo
 }
+Contador::TipoContador Contador::obtTipoContador()
+{
+
+}
 
 void Contador::asgVelocidad(double nv)
 {
@@ -75,6 +84,10 @@ void Contador::asgPosicion(T_posicion np)
 }
 
 void Contador::asgEstado(EstadoContador ne)
+{
+}
+
+void Contador::asgTipoContador(TipoContador nt)
 {
 }
 

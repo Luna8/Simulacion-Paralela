@@ -37,6 +37,11 @@ Contador::EstadoContador Contador::obtEstado()
 	return estado; // agregue su propio codigo
 }
 
+Contador::TipoContador Contador::obtTipoContador()
+{
+
+}
+
 void Contador::asgVelocidad(double nv)
 {
 	velocidad = nv;
@@ -52,6 +57,12 @@ void Contador::asgEstado(EstadoContador ne)
 {
 	estado = ne;
 }
+
+void Contador::asgTipoContador(TipoContador nt)
+{
+	tipo = nt;
+}
+
 
 // EFE: avanza *this según su velocidad y evoluciona su estado en el tic que le toque.
 //En cada tic el contador avanza hacia adelante y en caso de que haya tortugas entra en estado contador
