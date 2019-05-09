@@ -1,13 +1,16 @@
 #pragma once
 
 #include <fstream>
+#include <sstream>
 #include <math.h>
 #include <assert.h>     /* assert */
 #include <random>
+#include <iostream>
 using namespace std;
 
 #include "Tortuga.h"
 #include "Contador.h"
+#include "Aleatorizador.h"
 
 class Simulador
 {
@@ -89,7 +92,9 @@ public:
 	bool validarDatos(ifstream archivo);
 
 	template < typename T, class F >
-	vector< vector< T > > cargarDatos(ifstream archivo);
+	vector< vector< double > > cargarDatos(ifstream& archivo, F t) throw (invalid_argument, out_of_range);
+	template < typename T, class F >
+	vector< vector< double > > validarDatos(ifstream& archivo, F t) throw (invalid_argument, out_of_range);
 	vector< vector< double > > secciones;		//wtf?
 	vector< vector< double > > cuadrantes;
 	vector<Tortuga> vectorTortugas;
@@ -192,7 +197,28 @@ bool Simulador::validarDatos(ifstream archivo) {
 
 }
 
-vector< vector< T > > Simulador::cargarDatos(ifstream archivo) {
-
+template < typename T, class F >
+vector< vector< double > > Simulador::cargarDatos(ifstream& archivo, F t) throw (invalid_argument, out_of_range)
+{
+	vector< vector< T > > valores;
+	vector< T > linea_valores;
+	string linea;
+	while (getline(archivo, linea)) {
+		linea_valores.clear();
+		stringstream ss(linea);
+		string numero_S;
+		T numero_T;
+		while (getline(ss, numero_S, ',')) {
+			try {
+				numero_T = t(numero_S);
+			}
+			catch (exception e) {
+				throw e;
+			}
+			linea_valores.push_back(numero_T);
+		}
+		valores.push_back(linea_valores);
+	}
+	return valores;
 
 }

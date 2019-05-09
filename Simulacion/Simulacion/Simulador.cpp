@@ -20,9 +20,10 @@ void Simulador::inicializarPlaya(ifstream arch_secciones)
 	//C4: Distancia de la berma a las dunas en metros
 
 	//FALTA FUNCION VALIDARDATOS Y CARGARDATOS
-	bool lecturaCorrecta = validarDatos(arch_secciones);
+	ifstream ee(arch_secciones, ios::in);
+	bool lecturaCorrecta = validarDatos(ee, stoi_wrapper);
 	if (lecturaCorrecta){
-		secciones = cargarDatos(arch_secciones);
+		secciones = cargarDatos(ee, stoi_wrapper);
 		for (size_t i = 1; i < secciones.size(); i++)
 		{
 			secciones[i][0] += secciones[i-1][0];
@@ -43,7 +44,7 @@ void Simulador::inicializarCuadrantes(ifstream arch_cuadrantes)
 	if (lecturaCorrecta) {
 		cuadrantes = cargarDatos(arch_secciones);
 		tiempoCuadrante = cuadrantes[0][1];
-		cantidadContadoresC = cuadrantes[0][0]:
+		cantidadContadoresC = cuadrantes[0][0];
 		cuadrantes.erase(cuadrantes.begin());
 		
 	}
@@ -144,17 +145,16 @@ void Simulador::inicializarContadores(int cantidad, double velocidad_promedio, d
 			vectorContadores[i].asgVelocidad(velocidadC);
 		}
 		//Ahora los asignamos a su posición inicial y el tipo
-		vectorContadores[0].tipo = Contador::horizontal;
-		vectorContadores[0].posicion.first = 0;
-		vectorContadores[0].posicion.second = 0;
+		vectorContadores[0].asgTipoContador(Contador::horizontal);
+		vectorContadores[0].asgPosicion(pair< int, int >(0, 0));
 		
 		for (int i = 1; i < cantidadContadoresV; i++) {
-			vectorContadores[i].tipo = Contador::vertical;
-			vectorContadores[i].posicion.first = sectorV
+			vectorContadores[i].asgTipoContador(Contador::vertical);
+			
 		}
 
 		for (int i = (cantidadContadoresV+1); i < cantidadContadoresC+cantidadContadoresV+1; i++) {
-			vectorContadores[i].tipo = Contador::cuadrante;
+			vectorContadores[i].asgTipoContador(Contador::cuadrante);
 		}
 
 
@@ -238,15 +238,16 @@ double Simulador::random_logistic(double location, double scale)
 	assert(location >= 0.);
 	return location - scale * log(1. / random_uniform(generator) - 1.);
 }
-
-bool Simulador::validarDatos(ifstream archivo) {
+template < typename T, class F >
+bool Simulador::validarDatos(ifstream& archivo, F t) throw (invalid_argument, out_of_range)
+{
 	/* lee el archivo dobles */
-	ifstream d("dobles.txt", ios::in);
+	ifstream d(archivo, ios::in);
 	if (!d)
 		cout << "no encuentra el archivo de datos" << endl;
 	vector< vector< double > > vd;
 	try {
-		vd = cargaDatos< double >(d, stod_wrapper); // usa wrapper de stod
+		vd = cargarDatos< double >(d); // usa wrapper de stod
 	}
 	catch (exception e) {
 		cout << "valor invalido o fuera de limite" << endl;
@@ -258,30 +259,7 @@ bool Simulador::validarDatos(ifstream archivo) {
 	return 0;
 }
 
-template < typename T, class F >
-vector< vector< T > > Simulador::cargarDatos(ifstream archivo) {
-	vector< vector< T > > valores;
-	vector< T > linea_valores;
-	string linea;
-	while (getline(archivo, linea)) {
-		linea_valores.clear();
-		stringstream ss(linea);
-		string numero_S;
-		T numero_T;
-		while (getline(ss, numero_S, ',')) {
-			try {
-				numero_T = t(numero_S);
-			}
-			catch (exception e) {
-				throw e;
-			}
-			linea_valores.push_back(numero_T);
-		}
-		valores.push_back(linea_valores);
-	}
-	return valores;
 
-}
 
 
 //PARALELIZACIÓN
