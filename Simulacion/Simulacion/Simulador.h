@@ -197,12 +197,10 @@ double Simulador::random_logistic(double location, double scale)
 template < typename T, class F >
 vector< vector< double > >Simulador::lecturaDatosValidados(ifstream& archivo, F t) throw (invalid_argument, out_of_range)
 {
-	bool lectura = false;
 	/* lee el archivo dobles */
 	ifstream d(archivo, ios::in);
 	if (!d) {
 		cout << "no encuentra el archivo de datos" << endl;
-		lectura = false;
 	}
 	vector< vector< double > > vd;
 	try {
@@ -210,7 +208,7 @@ vector< vector< double > >Simulador::lecturaDatosValidados(ifstream& archivo, F 
 	}
 	catch (exception e) {
 		cout << "valor invalido o fuera de limite" << endl;
-		lectura = false;
+
 	}
 	/*for (auto f : vd)
 		for (auto x : f)

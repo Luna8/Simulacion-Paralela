@@ -78,10 +78,8 @@ void Simulador::inicializarTransectoBerma(ifstream arch_transecto_paralelo)
 // con el promedio y desviación dados para la velocidad.
 void Simulador::inicializarTortugas(ifstream comportamiento_tortugas)
 {
-	bool lecturaCorrecta = validarDatos(comportamiento_tortugas);
-	if (lecturaCorrecta) {
 		//Inicializar valores del vector tortugas desde el archivo "comportamiento_tortugas"
-		vector<vector< double > > tortugas = cargarDatos< double >(comportamiento_tortugas, stod_wrapper);
+		vector<vector< double > > tortugas = lecturaDatosValidados< double >(comportamiento_tortugas, stod_wrapper);
 		double vagar = tortugas[0][0];
 		double camar = tortugas[0][1];
 		double excavar = tortugas[0][2];
@@ -112,7 +110,7 @@ void Simulador::inicializarTortugas(ifstream comportamiento_tortugas)
 			velocidadT = distribucionNormal(generator);
 			vectorTortugas[i].asgVelocidad(velocidadT);
 		}
-	}
+	
 }
 
 //ANA
