@@ -20,15 +20,13 @@ void Simulador::inicializarPlaya(ifstream arch_secciones)
 	//C4: Distancia de la berma a las dunas en metros
 
 	//FALTA FUNCION VALIDARDATOS Y CARGARDATOS
-	ifstream ee(arch_secciones, ios::in);
-	bool lecturaCorrecta = validarDatos(ee, stoi_wrapper);
-	if (lecturaCorrecta){
-		secciones = cargarDatos(ee, stoi_wrapper);
+	//ifstream ee(arch_secciones, ios::in);
+		secciones = lecturaDatosValidados< double >(arch_secciones, stod_wrapper);
 		for (size_t i = 1; i < secciones.size(); i++)
 		{
 			secciones[i][0] += secciones[i-1][0];
 		}
-	}
+	
 }
 
 // EFE: inicializa los cuadrantes con los datos en el archivo.
@@ -40,14 +38,12 @@ void Simulador::inicializarCuadrantes(ifstream arch_cuadrantes)
 	//Y II
 	//X SD
 	//Y SD
-	bool lecturaCorrecta = validarDatos(arch_cuadrantes);
-	if (lecturaCorrecta) {
-		cuadrantes = cargarDatos(arch_secciones);
+		cuadrantes = lecturaDatosValidados< double >(arch_cuadrantes, stod_wrapper);
 		tiempoCuadrante = cuadrantes[0][1];
 		cantidadContadoresC = cuadrantes[0][0];
 		cuadrantes.erase(cuadrantes.begin());
 		
-	}
+	
 }
 
 // EFE: inicializa los transectos verticales sobre la berma con los datos en el archivo.
@@ -57,28 +53,24 @@ void Simulador::inicializarTransectosVerticales(ifstream arch_transectos_vertica
 	// X II
 	// Y II
 	// Y SD
-	bool lecturaCorrecta = validarDatos(arch_transectos_verticales);
-	if (lecturaCorrecta) {
-		vector< vector< T > > verticales = cargarDatos(arch_transectos_verticales);
+		vector< vector< double > > verticales = lecturaDatosValidados< double >(arch_transectos_verticales, stod_wrapper);
 		tiempoVertical = verticales[0][1];
 		cantidadContadoresV = verticales[0][0];
 		verticales.erase(verticales.begin());
 
-	}
+	
 }
 
 // EFE: inicializa el transecto paralelo a la berma con el ancho y largo indicado.
 void Simulador::inicializarTransectoBerma(ifstream arch_transecto_paralelo)
 {
-	bool lecturaCorrecta = validarDatos(arch_transecto_paralelo);
-	if (lecturaCorrecta) {
-		vector< vector< T > > paralelo = cargarDatos(arch_transecto_paralelo);
+		vector< vector< double > > paralelo = lecturaDatosValidados< double >(arch_transecto_paralelo, stod_wrapper);
 		tiempoParalelo = paralelo[0][1];
 		rangoVision = paralelo[0][2];
 		anchoParalelo = paralelo[1][0];
 		largoParalelo = paralelo[1][1];
 
-	}
+	
 }
 
 //ALLEN
@@ -89,18 +81,18 @@ void Simulador::inicializarTortugas(ifstream comportamiento_tortugas)
 	bool lecturaCorrecta = validarDatos(comportamiento_tortugas);
 	if (lecturaCorrecta) {
 		//Inicializar valores del vector tortugas desde el archivo "comportamiento_tortugas"
-		vector< T > tortugas = cargarDatos(comportamiento_tortugas);
-		double vagar = tortugas[0];
-		double camar = tortugas[1];
-		double excavar = tortugas[2];
-		double poner = tortugas[3];
-		double tapar = tortugas[4];
-		double camuflar = tortugas[5];
-		double velocidadPromEst = tortugas[6]; //Velocidad promedio estimada
-		double desviacionEstVelocidad = tortugas[8]; //desviación estándar de la velocidad
-		double sEscala = tortugas[9]; //Parámetro s (escala) para la distribución logística de la arribada.
-		double duracionPromedio = tortugas[10]; //Duración promedio de minutos desde “camar” hasta “camuflar”
-		double desviacionEstDuracion = tortugas[11]; //Desviación estándar de la duración promedio entre “camar” y “camuflar”
+		vector<vector< double > > tortugas = cargarDatos< double >(comportamiento_tortugas, stod_wrapper);
+		double vagar = tortugas[0][0];
+		double camar = tortugas[0][1];
+		double excavar = tortugas[0][2];
+		double poner = tortugas[0][3];
+		double tapar = tortugas[0][4];
+		double camuflar = tortugas[0][5];
+		double velocidadPromEst = tortugas[0][6]; //Velocidad promedio estimada
+		double desviacionEstVelocidad = tortugas[0][8]; //desviación estándar de la velocidad
+		double sEscala = tortugas[0][9]; //Parámetro s (escala) para la distribución logística de la arribada.
+		double duracionPromedio = tortugas[0][10]; //Duración promedio de minutos desde “camar” hasta “camuflar”
+		double desviacionEstDuracion = tortugas[0][11]; //Desviación estándar de la duración promedio entre “camar” y “camuflar”
 		//El parámetro u (mi) debe ser igual a cero
 
 		//Almacenamiento de tortugas: Vector, Lista, Diccionario???
@@ -182,7 +174,7 @@ void Simulador::inicializarArribada(double u, double s)
 	vectorArribada[1] = posicionY
 	vectorArribada[2] = ticAparicion*/
 	for (int i = 0; i < cantidadTortugas; i++) {
-		vectorArribada = distribucionLogistica(); //En el caso que la función de las posiciones y el tic de aparición
+		//vectorTortugas[i] = distribucionLogistica(); //En el caso que la función de las posiciones y el tic de aparición
 		double  randomTic = Aleatorizador::random_logistic(u, s);
 
 	}
@@ -238,29 +230,6 @@ double Simulador::random_logistic(double location, double scale)
 	assert(location >= 0.);
 	return location - scale * log(1. / random_uniform(generator) - 1.);
 }
-template < typename T, class F >
-bool Simulador::validarDatos(ifstream& archivo, F t) throw (invalid_argument, out_of_range)
-{
-	/* lee el archivo dobles */
-	ifstream d(archivo, ios::in);
-	if (!d)
-		cout << "no encuentra el archivo de datos" << endl;
-	vector< vector< double > > vd;
-	try {
-		vd = cargarDatos< double >(d); // usa wrapper de stod
-	}
-	catch (exception e) {
-		cout << "valor invalido o fuera de limite" << endl;
-	}
-	for (auto f : vd)
-		for (auto x : f)
-			cout << x << ',' << endl;
-	cin.ignore();
-	return 0;
-}
-
-
-
 
 //PARALELIZACIÓN
 /* Hay diferentes formas de paralelizar
@@ -277,5 +246,7 @@ bool Simulador::validarDatos(ifstream& archivo, F t) throw (invalid_argument, ou
 	Dividir hilos de tortugas de hilos de contadores
 	Sabemos desde el inicio si la tortuga cayó en uno de los sectores en los que se cuenta o no
 	entonces solo se deben contemplar esas tortugas.
+
+	//
 
 */

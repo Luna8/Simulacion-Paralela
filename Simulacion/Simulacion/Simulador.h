@@ -89,16 +89,16 @@ public:
 	// RET: estimación del total de tortugas que anidaron con base en el método de cuadrantes.
 	double obtEstimacionXcuadrantes();
 
-	bool validarDatos(ifstream archivo);
-
 	template < typename T, class F >
 	vector< vector< double > > cargarDatos(ifstream& archivo, F t) throw (invalid_argument, out_of_range);
 	template < typename T, class F >
-	vector< vector< double > > validarDatos(ifstream& archivo, F t) throw (invalid_argument, out_of_range);
+	vector< vector< double > > lecturaDatosValidados(ifstream& archivo, F t) throw (invalid_argument, out_of_range);
 	vector< vector< double > > secciones;		//wtf?
 	vector< vector< double > > cuadrantes;
 	vector<Tortuga> vectorTortugas;
 	vector<Contador> vectorContadores;
+	double stod_wrapper(string v) throw (invalid_argument, out_of_range) { return std::stod(v); }
+
 	
 
 
@@ -107,6 +107,7 @@ private:
 	int tiempoVertical;
 	int cantidadContadoresV;
 	int cantidadContadoresC;
+	int cantidadTortugas;
 	int tiempoParalelo;
 	int rangoVision;
 	int anchoParalelo;
@@ -193,8 +194,29 @@ double Simulador::random_logistic(double location, double scale)
 	return location - scale * log(1. / random_uniform(generator) - 1.);
 }
 
-bool Simulador::validarDatos(ifstream archivo) {
-
+template < typename T, class F >
+vector< vector< double > >Simulador::lecturaDatosValidados(ifstream& archivo, F t) throw (invalid_argument, out_of_range)
+{
+	bool lectura = false;
+	/* lee el archivo dobles */
+	ifstream d(archivo, ios::in);
+	if (!d) {
+		cout << "no encuentra el archivo de datos" << endl;
+		lectura = false;
+	}
+	vector< vector< double > > vd;
+	try {
+		vd = cargarDatos< double >(d); // usa wrapper de stod
+	}
+	catch (exception e) {
+		cout << "valor invalido o fuera de limite" << endl;
+		lectura = false;
+	}
+	/*for (auto f : vd)
+		for (auto x : f)
+			cout << x << ',' << endl;
+	cin.ignore();*/
+	return vd;
 }
 
 template < typename T, class F >
