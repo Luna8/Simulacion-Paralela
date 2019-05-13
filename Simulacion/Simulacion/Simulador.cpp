@@ -247,4 +247,14 @@ double Simulador::random_logistic(double location, double scale)
 
 	//
 
+	Notas 13.05.19
+	Asignar hilos a sectores
+	Vamos a trabajar de 16 hilos en adelante. En el caso de 16 serían 15 para los sectores y 1 para el contador paralelo
+	32: 2 hilos por sector, 1 al paralelo, 1 sin nada
+	64: 4 por sector, 1 paralelo, 3 sin nada
+	Se pueden partir los sectores en partes según la cantidad de hilos
+	Considerar una clase Ssector
+	Recordar dividir tortugas por sector desde que nacen 
+	En cada ciclo puede ser que primero tortugas se mueven y luego los contadores cuentan 
+
 */
