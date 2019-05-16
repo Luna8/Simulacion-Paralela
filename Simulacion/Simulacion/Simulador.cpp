@@ -10,7 +10,7 @@ Simulador::~Simulador()
 }
 
 // EFE:inicializa las secciones en que se divide la playa con los datos en el archivo.
-void Simulador::inicializarPlaya(ifstream arch_secciones)
+void Simulador::inicializarPlaya(ifstream& arch_secciones)
 {
 	//Estructura: vector de vectores cuyas filas son las secciones y las columnas 
 	//tienen la siguiente información:
@@ -20,8 +20,8 @@ void Simulador::inicializarPlaya(ifstream arch_secciones)
 	//C4: Distancia de la berma a las dunas en metros
 
 	//FALTA FUNCION VALIDARDATOS Y CARGARDATOS
-	//ifstream ee(arch_secciones, ios::in);
-		secciones = lecturaDatosValidados< double >(arch_secciones, stod_wrapper);
+	//ifstream& ee(arch_secciones, ios::in);
+		secciones = lecturaDatosValidados< double >(arch_secciones, stod_wrapper(arch_secciones));
 		for (size_t i = 1; i < secciones.size(); i++)
 		{
 			secciones[i][0] += secciones[i-1][0];
@@ -30,7 +30,7 @@ void Simulador::inicializarPlaya(ifstream arch_secciones)
 }
 
 // EFE: inicializa los cuadrantes con los datos en el archivo.
-void Simulador::inicializarCuadrantes(ifstream arch_cuadrantes)
+void Simulador::inicializarCuadrantes(ifstream& arch_cuadrantes)
 {
 
 	//Cada posicion del vector cuadrantes contiene la información de un cuadrante
@@ -47,7 +47,7 @@ void Simulador::inicializarCuadrantes(ifstream arch_cuadrantes)
 }
 
 // EFE: inicializa los transectos verticales sobre la berma con los datos en el archivo.
-void Simulador::inicializarTransectosVerticales(ifstream arch_transectos_verticales)
+void Simulador::inicializarTransectosVerticales(ifstream& arch_transectos_verticales)
 {
 	//Se tiene para cada transecto paralelo lo siguiente:
 	// X II
@@ -62,7 +62,7 @@ void Simulador::inicializarTransectosVerticales(ifstream arch_transectos_vertica
 }
 
 // EFE: inicializa el transecto paralelo a la berma con el ancho y largo indicado.
-void Simulador::inicializarTransectoBerma(ifstream arch_transecto_paralelo)
+void Simulador::inicializarTransectoBerma(ifstream& arch_transecto_paralelo)
 {
 		vector< vector< double > > paralelo = lecturaDatosValidados< double >(arch_transecto_paralelo, stod_wrapper);
 		tiempoParalelo = paralelo[0][1];
@@ -76,7 +76,7 @@ void Simulador::inicializarTransectoBerma(ifstream arch_transecto_paralelo)
 //ALLEN
 // EFE: crea la cantidad indicada de tortugas y las inicializa usando la distribución normal 
 // con el promedio y desviación dados para la velocidad.
-void Simulador::inicializarTortugas(ifstream comportamiento_tortugas)
+void Simulador::inicializarTortugas(ifstream& comportamiento_tortugas)
 {
 		//Inicializar valores del vector tortugas desde el archivo "comportamiento_tortugas"
 		vector<vector< double > > tortugas = lecturaDatosValidados< double >(comportamiento_tortugas, stod_wrapper);

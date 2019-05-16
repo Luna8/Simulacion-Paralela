@@ -34,20 +34,20 @@ public:
 	*/
 
 	// EFE:inicializa las secciones en que se divide la playa con los datos en el archivo.
-	void inicializarPlaya(ifstream arch_secciones);
+	void inicializarPlaya(ifstream& arch_secciones);
 
 	// EFE: inicializa los cuadrantes con los datos en el archivo.
-	void inicializarCuadrantes(ifstream arch_cuadrantes);
+	void inicializarCuadrantes(ifstream& arch_cuadrantes);
 
 	// EFE: inicializa los transectos verticales sobre la berma con los datos en el archivo.
-	void inicializarTransectosVerticales(ifstream arch_transectos_verticales);
+	void inicializarTransectosVerticales(ifstream& arch_transectos_verticales);
 
 	// EFE: inicializa el transecto paralelo a la berma con el ancho y largo indicado.
-	void inicializarTransectoBerma(ifstream arch_transecto_paralelo);
+	void inicializarTransectoBerma(ifstream& arch_transecto_paralelo);
 
 	// EFE: crea la cantidad indicada de tortugas y las inicializa usando la distribución normal 
 	// con el promedio y desviación dados para la velocidad.
-	void inicializarTortugas(ifstream comportamiento_tortugas);
+	void inicializarTortugas(ifstream& comportamiento_tortugas);
 	// REQ: cantidad >= 3.
 	// EFE: crea la cantidad indicada de contadores y los inicializa usando la distribución normal 
 	// con el promedio y desviación dados para la velocidad. Si cantidad > 3, los distribuye a partes
@@ -114,7 +114,7 @@ private:
 	int largoParalelo;
 
 };
-
+/*
 Simulador::Simulador()
 {
 }
@@ -124,23 +124,23 @@ Simulador::~Simulador()
 {
 }
 
-void Simulador::inicializarPlaya(ifstream arch_secciones)
+void Simulador::inicializarPlaya(ifstream& arch_secciones)
 {
 }
 
-void Simulador::inicializarCuadrantes(ifstream arch_cuadrantes)
+void Simulador::inicializarCuadrantes(ifstream& arch_cuadrantes)
 {
 }
 
-void Simulador::inicializarTransectosVerticales(ifstream arch_transectos_verticales)
+void Simulador::inicializarTransectosVerticales(ifstream& arch_transectos_verticales)
 {
 }
 
-void Simulador::inicializarTransectoBerma(ifstream arch_transecto_paralelo)
+void Simulador::inicializarTransectoBerma(ifstream& arch_transecto_paralelo)
 {
 }
 
-void Simulador::inicializarTortugas(ifstream comportamiento_tortugas)
+void Simulador::inicializarTortugas(ifstream& comportamiento_tortugas)
 {
 }
 
@@ -192,7 +192,7 @@ double Simulador::random_logistic(double location, double scale)
 	assert(scale > 0.);
 	assert(location >= 0.);
 	return location - scale * log(1. / random_uniform(generator) - 1.);
-}
+}*/
 
 template < typename T, class F >
 vector< vector< double > >Simulador::lecturaDatosValidados(ifstream& archivo, F t) throw (invalid_argument, out_of_range)

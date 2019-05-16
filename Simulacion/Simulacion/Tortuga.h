@@ -40,7 +40,7 @@ private:
 	T_posicion posicion; // posicion.first == coordenada X, posicion.second = coordenada Y
 	EstadoTortuga estado;
 	std::default_random_engine generator;
-	std::normal_distribution<double> distribution(5.0, 2.0);
+	//std::normal_distribution<double> distribution(5.0, 2.0);
 };
 
 Tortuga::Tortuga()

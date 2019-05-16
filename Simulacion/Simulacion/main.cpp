@@ -10,7 +10,8 @@
 #include "Tortuga.h"
 using namespace std;
 
-int main()
+
+int main(int argc, const char * argv[])
 {
 	/*int cantidadSimulaciones;
 	int tiempoSimulado;
@@ -42,53 +43,13 @@ int main()
 	}*/
 
 
+
+	Simulador simulador;
+	ifstream d("terreno.txt", ios::in);
+	simulador.inicializarPlaya(d);
+
+
+		
 }
 
-template < typename T, class F >
-vector< vector< double > >Simulador::lecturaDatosValidados(ifstream& archivo, F t) throw (invalid_argument, out_of_range)
-{
-	/* lee el archivo dobles */
-	ifstream d(archivo, ios::in);
-	if (!d) {
-		cout << "no encuentra el archivo de datos" << endl;
-	}
-	vector< vector< double > > vd;
-	try {
-		vd = cargarDatos< double >(d); // usa wrapper de stod
-	}
-	catch (exception e) {
-		cout << "valor invalido o fuera de limite" << endl;
 
-	}
-	/*for (auto f : vd)
-		for (auto x : f)
-			cout << x << ',' << endl;
-	cin.ignore();*/
-	return vd;
-}
-
-template < typename T, class F >
-vector< vector< double > > Simulador::cargarDatos(ifstream& archivo, F t) throw (invalid_argument, out_of_range)
-{
-	vector< vector< T > > valores;
-	vector< T > linea_valores;
-	string linea;
-	while (getline(archivo, linea)) {
-		linea_valores.clear();
-		stringstream ss(linea);
-		string numero_S;
-		T numero_T;
-		while (getline(ss, numero_S, ',')) {
-			try {
-				numero_T = t(numero_S);
-			}
-			catch (exception e) {
-				throw e;
-			}
-			linea_valores.push_back(numero_T);
-		}
-		valores.push_back(linea_valores);
-	}
-	return valores;
-
-}
