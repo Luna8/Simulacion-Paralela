@@ -33,16 +33,17 @@ public:
 	void avanzar(int tic);
 
 	// Aquí se definirán los parámetros de las distribuciones
-	void definirDistribuciones();
+	void definirDistribuciones(); //Falta
 
 private:
 	double velocidad;
 	T_posicion posicion; // posicion.first == coordenada X, posicion.second = coordenada Y
 	EstadoTortuga estado;
-	std::default_random_engine generator;
-	std::normal_distribution<double> distribution(5.0, 2.0);
+	default_random_engine generator;
+	//normal_distribution<double> distribution(5.0, 2.0); //Error en 5.0, 2.0
 };
 
+/*
 Tortuga::Tortuga()
 {
 }
@@ -88,3 +89,4 @@ void Tortuga::avanzar(int tic)
 
 void Tortuga::definirDistribuciones() {
 }
+*/

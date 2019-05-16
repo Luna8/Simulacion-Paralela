@@ -59,11 +59,10 @@ void Tortuga::asgEstado(EstadoTortuga ne)
 //Luego de generar ese tiempo estimado entonces la tortuga durante ese rato hace las acciones que vaya a realizar 
 //Se proponen dos formas: distribuir de forma uniforme le tiempo entre las diferentes acciones
 //generar valores random y que todos sumen el tiempo completo 
-
 void Tortuga::avanzar(int tic)
 {
 	//REVISAR				
-	posicion.second += velocidad * 16.6;
+	posicion.second += (velocidad * 16.6);
 
 		
 }

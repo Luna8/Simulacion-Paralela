@@ -115,6 +115,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Aleatorizador.h" />
+    <ClInclude Include="Contador.h" />
+    <ClInclude Include="Tortuga.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Contador.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Tortuga.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,4 +1,3 @@
-//#include "pch.h"
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -12,40 +11,42 @@ using namespace std;
 
 int main()
 {
-	/*int cantidadSimulaciones;
+	int cantidadSimulaciones;
 	int tiempoSimulado;
 	int cantidadTortugas;
 	int cantidadHilos;
-	int ticks = tiempoSimulado * 60;
-	Simulador simulador = new Simulador(); //O "Simulador simulador;"?
+	int ticks; // = tiempoSimulado * 60;
+	Simulador simulador;
+
+	Contador contador;
+
+	ifstream arch_experimentos("experimentos.csv", ios::in);
+	if (!arch_experimentos)
+		cout << "No encuentra el archivo de datos" << endl;
 
 	/*1. Cargar y validar los datos del archivo “experimentos.csv”.*/
 	/*2. Cargar y validar los archivos de datos de entrada.*/
-	/*bool lecturaCorrecta = validarDatos< vector< T > >(arch_experimentos);
-	if (lecturaCorrecta) {
-		vector< vector< double > > experimentos = cargarDatos< vector< T > >(arch_experimentos);
-		for (size_t i = 1; i < experimentos.size(); i++)
+	vector< vector< double > > experimentos = lecturaDatosValidados< double >(arch_experimentos, simulador.stod_wrapper);
+	for (size_t i = 1; i < experimentos.size(); i++)
+	{
+		cantidadSimulaciones = experimentos[0][0];
+		tiempoSimulado = experimentos[0][2];
+		cantidadTortugas = experimentos[0][3];
+		ticks = tiempoSimulado * 60;
+		for (size_t j = 4; j < experimentos[0].size(); j++)
 		{
-			cantidadSimulaciones = experimentos[0][0];
-			tiempoSimulado = experimentos[0][2];
-			cantidadTortugas = experimentos[0][3];
-			for (size_t j = 4; j < experimentos[0].size(); j++)
-			{
-				/*3. Ejecutar cada experimento indicado en el archivo “experimentos.csv”:*/
-				/*3.1 Asignar la instancia de Simulador con los datos de entrada.*/
-				/*3.2 Ejecutar la simulación invocando Simulador::simular(...).*/
-	/*			cantidadHilos = experimentos[0][j];
-				simulador.cantidadHilos = cantidadHilos; //Agregar simulador.cantidadHilos
-				simulador.simular(ticks);
-			}
+			/*3. Ejecutar cada experimento indicado en el archivo “experimentos.csv”:*/
+			/*3.1 Asignar la instancia de Simulador con los datos de entrada.*/
+			/*3.2 Ejecutar la simulación invocando Simulador::simular(...).*/
+			cantidadHilos = experimentos[0][j];
+			simulador.cantidadHilos = cantidadHilos; //Agregar simulador.cantidadHilos
+			simulador.simular(ticks);
 		}
-	}*/
-
-
+	}
 }
 
 template < typename T, class F >
-vector< vector< double > >Simulador::lecturaDatosValidados(ifstream& archivo, F t) throw (invalid_argument, out_of_range)
+vector< vector< double > >lecturaDatosValidados(ifstream& archivo, F t) throw (invalid_argument, out_of_range)
 {
 	/* lee el archivo dobles */
 	ifstream d(archivo, ios::in);
@@ -54,7 +55,7 @@ vector< vector< double > >Simulador::lecturaDatosValidados(ifstream& archivo, F 
 	}
 	vector< vector< double > > vd;
 	try {
-		vd = cargarDatos< double >(d); // usa wrapper de stod
+		vd = cargarDatos(d, simulador.stod_wrapper); // usa wrapper de stod
 	}
 	catch (exception e) {
 		cout << "valor invalido o fuera de limite" << endl;
@@ -68,7 +69,7 @@ vector< vector< double > >Simulador::lecturaDatosValidados(ifstream& archivo, F 
 }
 
 template < typename T, class F >
-vector< vector< double > > Simulador::cargarDatos(ifstream& archivo, F t) throw (invalid_argument, out_of_range)
+vector< vector< double > >cargarDatos(ifstream& archivo, F t) throw (invalid_argument, out_of_range)
 {
 	vector< vector< T > > valores;
 	vector< T > linea_valores;
@@ -90,5 +91,72 @@ vector< vector< double > > Simulador::cargarDatos(ifstream& archivo, F t) throw 
 		valores.push_back(linea_valores);
 	}
 	return valores;
-
 }
+
+/*
+Pruebas de Contador
+
+	int a;
+
+	Contador contador;
+
+	Contador::EstadoContador estado = Contador::contar;
+	Contador::T_posicion posicion = make_pair(3,7);
+	Contador::TipoContador tipo = Contador::horizontal;
+	double velocidad;
+
+	contador.asgEstado(estado);
+	contador.asgPosicion(posicion);
+	contador.asgTipoContador(tipo);
+	contador.asgVelocidad(10.3);
+
+	estado = contador.obtEstado();
+	posicion = contador.obtPosicion();
+	tipo = contador.obtTipoContador();
+	velocidad = contador.obtVelocidad();
+
+	cout << "Estado: " << estado << ", Posicion X: " << posicion.first << ", Posicion Y: " << posicion.second << ", Tipo: " << tipo << ", Velocidad: " << velocidad << endl;
+
+	contador.avanzar(60);
+
+	estado = contador.obtEstado();
+	posicion = contador.obtPosicion();
+	tipo = contador.obtTipoContador();
+	velocidad = contador.obtVelocidad();
+
+	cout << "Estado: " << estado << ", Posicion X: " << posicion.first << ", Posicion Y: " << posicion.second << ", Tipo: " << tipo << ", Velocidad: " << velocidad << endl;
+
+	cin >> a;
+*/
+
+/*
+Pruebas de Tortuga
+
+	int a;
+
+	Tortuga tortuga;
+
+	Tortuga::EstadoTortuga estado = Tortuga::vagar;
+	Tortuga::T_posicion posicion = make_pair(3, 7);
+	double velocidad;
+
+	tortuga.asgEstado(estado);
+	tortuga.asgPosicion(posicion);
+	tortuga.asgVelocidad(10.3);
+
+	estado = tortuga.obtEstado();
+	posicion = tortuga.obtPosicion();
+	velocidad = tortuga.obtVelocidad();
+
+	cout << "Estado: " << estado << ", Posicion X: " << posicion.first << ", Posicion Y: " << posicion.second << ", Velocidad: " << velocidad << endl;
+
+	tortuga.avanzar(60);
+
+	estado = tortuga.obtEstado();
+	posicion = tortuga.obtPosicion();
+	velocidad = tortuga.obtVelocidad();
+
+	cout << "Estado: " << estado << ", Posicion X: " << posicion.first << ", Posicion Y: " << posicion.second << ", Velocidad: " << velocidad << endl;
+
+	cin >> a;
+*/

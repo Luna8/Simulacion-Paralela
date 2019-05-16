@@ -99,7 +99,7 @@ public:
 	vector<Contador> vectorContadores;
 	double stod_wrapper(string v) throw (invalid_argument, out_of_range) { return std::stod(v); }
 
-	
+	int cantidadHilos; //Lo envía el main
 
 
 private:
