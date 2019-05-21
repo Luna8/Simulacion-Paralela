@@ -1,0 +1,94 @@
+﻿  main.cpp
+c:\users\allen\source\repos\simulacion-paralela\simulacion\simulacion\aleatorizador.h(39): warning C4244: 'initializing': conversion from '_Rep' to 'unsigned int', possible loss of data
+          with
+          [
+              _Rep=__int64
+          ]
+c:\users\allen\source\repos\simulacion-paralela\simulacion\simulacion\simulador.h(93): warning C4290: C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
+c:\users\allen\source\repos\simulacion-paralela\simulacion\simulacion\simulador.h(95): warning C4290: C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
+c:\users\allen\source\repos\simulacion-paralela\simulacion\simulacion\simulador.h(100): warning C4290: C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
+c:\users\allen\source\repos\simulacion-paralela\simulacion\simulacion\main.cpp(23): warning C4290: C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
+c:\users\allen\source\repos\simulacion-paralela\simulacion\simulacion\main.cpp(31): error C2062: type 'double' unexpected
+c:\users\allen\source\repos\simulacion-paralela\simulacion\simulacion\main.cpp(34): warning C4244: '=': conversion from '_Ty' to 'int', possible loss of data
+          with
+          [
+              _Ty=double
+          ]
+c:\users\allen\source\repos\simulacion-paralela\simulacion\simulacion\main.cpp(35): warning C4244: '=': conversion from '_Ty' to 'int', possible loss of data
+          with
+          [
+              _Ty=double
+          ]
+c:\users\allen\source\repos\simulacion-paralela\simulacion\simulacion\main.cpp(36): warning C4244: '=': conversion from '_Ty' to 'int', possible loss of data
+          with
+          [
+              _Ty=double
+          ]
+c:\users\allen\source\repos\simulacion-paralela\simulacion\simulacion\main.cpp(43): warning C4244: '=': conversion from '_Ty' to 'int', possible loss of data
+          with
+          [
+              _Ty=double
+          ]
+c:\users\allen\source\repos\simulacion-paralela\simulacion\simulacion\main.cpp(51): warning C4290: C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
+c:\users\allen\source\repos\simulacion-paralela\simulacion\simulacion\main.cpp(60): error C3861: 'simulador': identifier not found
+c:\users\allen\source\repos\simulacion-paralela\simulacion\simulacion\main.cpp(74): warning C4290: C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
+  Simulador.cpp
+c:\users\allen\source\repos\simulacion-paralela\simulacion\simulacion\aleatorizador.h(39): warning C4244: 'initializing': conversion from '_Rep' to 'unsigned int', possible loss of data
+          with
+          [
+              _Rep=__int64
+          ]
+c:\users\allen\source\repos\simulacion-paralela\simulacion\simulacion\simulador.h(93): warning C4290: C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
+c:\users\allen\source\repos\simulacion-paralela\simulacion\simulacion\simulador.h(95): warning C4290: C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
+c:\users\allen\source\repos\simulacion-paralela\simulacion\simulacion\simulador.h(100): warning C4290: C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
+c:\users\allen\source\repos\simulacion-paralela\simulacion\simulacion\simulador.cpp(24): error C3867: 'Simulador::stod_wrapper': non-standard syntax; use '&' to create a pointer to member
+c:\users\allen\source\repos\simulacion-paralela\simulacion\simulacion\simulador.cpp(24): error C2672: 'Simulador::lecturaDatosValidados': no matching overloaded function found
+c:\users\allen\source\repos\simulacion-paralela\simulacion\simulacion\simulador.cpp(41): error C3867: 'Simulador::stod_wrapper': non-standard syntax; use '&' to create a pointer to member
+c:\users\allen\source\repos\simulacion-paralela\simulacion\simulacion\simulador.cpp(41): error C2672: 'Simulador::lecturaDatosValidados': no matching overloaded function found
+c:\users\allen\source\repos\simulacion-paralela\simulacion\simulacion\simulador.cpp(42): warning C4244: '=': conversion from '_Ty' to 'int', possible loss of data
+          with
+          [
+              _Ty=double
+          ]
+c:\users\allen\source\repos\simulacion-paralela\simulacion\simulacion\simulador.cpp(43): warning C4244: '=': conversion from '_Ty' to 'int', possible loss of data
+          with
+          [
+              _Ty=double
+          ]
+c:\users\allen\source\repos\simulacion-paralela\simulacion\simulacion\simulador.cpp(56): error C3867: 'Simulador::stod_wrapper': non-standard syntax; use '&' to create a pointer to member
+c:\users\allen\source\repos\simulacion-paralela\simulacion\simulacion\simulador.cpp(56): error C2672: 'Simulador::lecturaDatosValidados': no matching overloaded function found
+c:\users\allen\source\repos\simulacion-paralela\simulacion\simulacion\simulador.cpp(57): warning C4244: '=': conversion from '_Ty' to 'int', possible loss of data
+          with
+          [
+              _Ty=double
+          ]
+c:\users\allen\source\repos\simulacion-paralela\simulacion\simulacion\simulador.cpp(58): warning C4244: '=': conversion from '_Ty' to 'int', possible loss of data
+          with
+          [
+              _Ty=double
+          ]
+c:\users\allen\source\repos\simulacion-paralela\simulacion\simulacion\simulador.cpp(67): error C3867: 'Simulador::stod_wrapper': non-standard syntax; use '&' to create a pointer to member
+c:\users\allen\source\repos\simulacion-paralela\simulacion\simulacion\simulador.cpp(67): error C2672: 'Simulador::lecturaDatosValidados': no matching overloaded function found
+c:\users\allen\source\repos\simulacion-paralela\simulacion\simulacion\simulador.cpp(68): warning C4244: '=': conversion from '_Ty' to 'int', possible loss of data
+          with
+          [
+              _Ty=double
+          ]
+c:\users\allen\source\repos\simulacion-paralela\simulacion\simulacion\simulador.cpp(69): warning C4244: '=': conversion from '_Ty' to 'int', possible loss of data
+          with
+          [
+              _Ty=double
+          ]
+c:\users\allen\source\repos\simulacion-paralela\simulacion\simulacion\simulador.cpp(70): warning C4244: '=': conversion from '_Ty' to 'int', possible loss of data
+          with
+          [
+              _Ty=double
+          ]
+c:\users\allen\source\repos\simulacion-paralela\simulacion\simulacion\simulador.cpp(71): warning C4244: '=': conversion from '_Ty' to 'int', possible loss of data
+          with
+          [
+              _Ty=double
+          ]
+c:\users\allen\source\repos\simulacion-paralela\simulacion\simulacion\simulador.cpp(82): error C3867: 'Simulador::stod_wrapper': non-standard syntax; use '&' to create a pointer to member
+c:\users\allen\source\repos\simulacion-paralela\simulacion\simulacion\simulador.cpp(82): error C2672: 'Simulador::lecturaDatosValidados': no matching overloaded function found
+  Generating Code...

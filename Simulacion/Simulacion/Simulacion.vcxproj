@@ -117,11 +117,13 @@
   <ItemGroup>
     <ClInclude Include="Aleatorizador.h" />
     <ClInclude Include="Contador.h" />
+    <ClInclude Include="Simulador.h" />
     <ClInclude Include="Tortuga.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Contador.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Simulador.cpp" />
     <ClCompile Include="Tortuga.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
