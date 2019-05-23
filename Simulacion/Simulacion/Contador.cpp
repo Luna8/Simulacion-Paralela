@@ -39,7 +39,7 @@ Contador::EstadoContador Contador::obtEstado()
 
 Contador::TipoContador Contador::obtTipoContador()
 {
-
+	return tipo;
 }
 
 void Contador::asgVelocidad(double nv)

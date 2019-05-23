@@ -43,6 +43,7 @@ private:
 	TipoContador tipo;
 };
 
+/*
 Contador::Contador()
 {
 }
@@ -94,3 +95,4 @@ void Contador::asgTipoContador(TipoContador nt)
 void Contador::avanzar(int tic)
 {
 }
+*/

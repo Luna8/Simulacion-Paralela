@@ -21,7 +21,7 @@ void Simulador::inicializarPlaya(ifstream arch_secciones)
 
 	//FALTA FUNCION VALIDARDATOS Y CARGARDATOS
 	//ifstream ee(arch_secciones, ios::in);
-		secciones = lecturaDatosValidados< double >(arch_secciones, stod_wrapper);
+		secciones = lecturaDatosValidados< double >(&arch_secciones, stod_wrapper);
 		for (size_t i = 1; i < secciones.size(); i++)
 		{
 			secciones[i][0] += secciones[i-1][0];
@@ -171,11 +171,17 @@ void Simulador::inicializarArribada(double u, double s)
 	vectorArribada[0] = posicionX
 	vectorArribada[1] = posicionY
 	vectorArribada[2] = ticAparicion*/
-	for (int i = 0; i < cantidadTortugas; i++) {
+	
+	/*for (int i = 0; i < cantidadTortugas; i++) {
 		//vectorTortugas[i] = distribucionLogistica(); //En el caso que la función de las posiciones y el tic de aparición
 		double  randomTic = Aleatorizador::random_logistic(u, s);
 
-	}
+	}*/
+
+	//Se genera para cada tic la cantidad total de tortugas que van a inicializarse en este tic
+	double  randomTic = Aleatorizador::random_logistic(u, s);
+	cout << randomTic << endl;
+
 }
 
 //ANA
@@ -221,12 +227,13 @@ double Simulador::obtEstimacionXcuadrantes()
 }
 
 default_random_engine Simulador::generator; // inicialización de la variable static
-uniform_real_distribution<double> Simulador::random_uniform(0.0 , 1.0); // inicialización de la variable static
+uniform_real_distribution<double> Simulador::random_uniform(0.0, 1.0); // inicialización de la variable static
 double Simulador::random_logistic(double location, double scale)
 {
 	assert(scale > 0.);
 	assert(location >= 0.);
-	return location - scale * log(1. / random_uniform(generator) - 1.);
+	double r = (double)random_uniform(generator);
+	return location - scale * log(1. / r - 1.);
 }
 
 //PARALELIZACIÓN

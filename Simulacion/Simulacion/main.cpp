@@ -1,4 +1,5 @@
 //#include "pch.h"
+#include <chrono>
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -10,8 +11,24 @@
 #include "Tortuga.h"
 using namespace std;
 
+std::default_random_engine generador; // generador de aleatorios
+std::uniform_real_distribution<double> random_uniform(0.0, 1.0); // distribución uniforme
+
+
 int main()
 {
+
+	typedef std::chrono::high_resolution_clock t_clock;
+	t_clock::time_point beginning = t_clock::now();
+
+	//...su código
+
+	t_clock::duration lapso = t_clock::now() - beginning;
+	unsigned semilla = lapso.count();
+	generador.seed(semilla);
+	// simulador.simular(tt, generador, random_uniform); con tt el total de tics que se van a simular
+	Simulador::random_logistic(0., 1.);
+
 	/*int cantidadSimulaciones;
 	int tiempoSimulado;
 	int cantidadTortugas;
@@ -40,7 +57,8 @@ int main()
 			}
 		}
 	}*/
-
+	Simulador simuladorP;
+	simuladorP.inicializarArribada(0.5, 0.2);
 
 }
 

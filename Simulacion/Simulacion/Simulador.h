@@ -114,7 +114,7 @@ private:
 	int largoParalelo;
 
 };
-
+/*
 Simulador::Simulador()
 {
 }
@@ -183,7 +183,7 @@ double Simulador::obtEstimacionXtransectoHorizontal()
 double Simulador::obtEstimacionXcuadrantes()
 {
 	return 0.0; // agregue su propio codigo
-}
+}*/
 
 default_random_engine Simulador::generator; // inicialización de la variable static
 uniform_real_distribution<double> Simulador::random_uniform(0.0, 1.0); // inicialización de la variable static
@@ -194,10 +194,10 @@ double Simulador::random_logistic(double location, double scale)
 	return location - scale * log(1. / random_uniform(generator) - 1.);
 }
 
-template < typename T, class F >
+/*template < typename T, class F >
 vector< vector< double > >Simulador::lecturaDatosValidados(ifstream& archivo, F t) throw (invalid_argument, out_of_range)
 {
-	/* lee el archivo dobles */
+	/* lee el archivo dobles *//*
 	ifstream d(archivo, ios::in);
 	if (!d) {
 		cout << "no encuentra el archivo de datos" << endl;
@@ -213,7 +213,7 @@ vector< vector< double > >Simulador::lecturaDatosValidados(ifstream& archivo, F 
 	/*for (auto f : vd)
 		for (auto x : f)
 			cout << x << ',' << endl;
-	cin.ignore();*/
+	cin.ignore();*//*
 	return vd;
 }
 
@@ -241,4 +241,4 @@ vector< vector< double > > Simulador::cargarDatos(ifstream& archivo, F t) throw 
 	}
 	return valores;
 
-}
+}*/
