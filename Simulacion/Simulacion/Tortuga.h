@@ -2,6 +2,8 @@
 
 #include <utility>
 #include <random>
+#include <iostream>
+#include <string>
 using namespace std;
 
 class Tortuga
@@ -39,8 +41,12 @@ private:
 	double velocidad;
 	T_posicion posicion; // posicion.first == coordenada X, posicion.second = coordenada Y
 	EstadoTortuga estado;
-	default_random_engine generator;
-	//normal_distribution<double> distribution(5.0, 2.0); //Error en 5.0, 2.0
+	double velocidadPromEst; //Velocidad promedio estimada
+	double desviacionEstVelocidad; //desviación estándar de la velocidad
+	double duracionPromedio; //Duración promedio de minutos desde “camar” hasta “camuflar”
+	double desviacionEstDuracion; //Desviación estándar de la duración promedio entre “camar” y “camuflar”
+	double duracion; //Valor de duración de la tortuga para realizar las acciones, generado con distribución normal
+	int ticInicial; //Guarda el tic de nacimiento de la tortuga
 };
 
 /*
