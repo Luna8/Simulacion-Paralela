@@ -71,19 +71,19 @@ public:
 	*/
 
 	// RET: total de tortugas que arribaron en la simulación.
-	long obtTotalTortugasArribaron();
+	long obtTotalTortugasArribaron(int nc, int i, int m);
 
 	// RET: total de tortugas que anidaron en la simulación.
-	long obtTotalTortugasAnidaron();
+	long obtTotalTortugasAnidaron(double a, int d, int w, int m, int slj, int no, double prto);
 
 	// RET: estimación del total de tortugas que anidaron con base en el método de transectos sobre la berma.
-	double obtEstimacionXtransectosSobreBerma();
+	double obtEstimacionXtransectosSobreBerma(int noc, int ne, int nv, double ac, int aci, int d, int m);
 
 	// RET: estimación del total de tortugas que arribaron con base en el método de transecto paralelo a la berma.
-	double obtEstimacionXtransectoHorizontal();
+	double obtEstimacionXtransectoHorizontal(int noc, int ne, int nv, double ac, int aci, int d, int m);
 
 	// RET: estimación del total de tortugas que anidaron con base en el método de cuadrantes.
-	double obtEstimacionXcuadrantes();
+	double obtEstimacionXcuadrantes(int noc, int ne, int nv, double ac, int aci, int d, int m);
 
 	template < typename T, class F >
 	vector< vector< double > > cargarDatos(ifstream& archivo, F t) throw (invalid_argument, out_of_range);
@@ -293,29 +293,39 @@ void Simulador::simular(int total_tics)
 */
 }
 
-long Simulador::obtTotalTortugasArribaron()
+long Simulador::obtTotalTortugasArribaron(int nc, int i, int m)
 {
-	return 0;  // agregue su propio codigo
+	long totalTortugasArribaron;
+	totalTortugasArribaron = nc * i / (4.2 * m);
+	return totalTortugasArribaron;  // agregue su propio codigo
 }
 
-long Simulador::obtTotalTortugasAnidaron()
+long Simulador::obtTotalTortugasAnidaron(double a, int d, int w, int m, int slj, int no, double prto)
 {
-	return 0; // agregue su propio codigo
+	long totalTortugasAnidaron;
+	totalTortugasAnidaron = (a * d / (2 * w * m * slj) * (no / prto));
+	return totalTortugasAnidaron; // agregue su propio codigo
 }
 
-double Simulador::obtEstimacionXtransectosSobreBerma()
+double Simulador::obtEstimacionXtransectosSobreBerma(int noc, int ne, int nv, double ac, int aci, int d, int m)
 {
-	return 0.0; // agregue su propio codigo
+	double estimacionXtransectosSobreBerma;
+	estimacionXtransectosSobreBerma = ((noc + 0.94 * ne + 0.47 * nv) * 2.25 * (ac / aci) * ((d / 60) / 64.8 * m));
+	return estimacionXtransectosSobreBerma; // agregue su propio codigo
 }
 
-double Simulador::obtEstimacionXtransectoHorizontal()
+double Simulador::obtEstimacionXtransectoHorizontal(int noc, int ne, int nv, double ac, int aci, int d, int m)
 {
-	return 0.0; // agregue su propio codigo
+	double estimacionXtransectoHorizontal;
+	estimacionXtransectoHorizontal = ((noc + 0.94 * ne + 0.47 * nv) * 2.25 * (ac / aci) * ((d / 60) / 64.8 * m));
+	return estimacionXtransectoHorizontal; // agregue su propio codigo
 }
 
-double Simulador::obtEstimacionXcuadrantes()
+double Simulador::obtEstimacionXcuadrantes(int noc, int ne, int nv, double ac, int aci, int d, int m)
 {
-	return 0.0; // agregue su propio codigo
+	double estimacionXcuadrantes;
+	estimacionXcuadrantes = ((noc + 0.94 * ne + 0.47 * nv) * 2.25 * (ac / aci) * ((d / 60) / 64.8 * m));
+	return estimacionXcuadrantes; // agregue su propio codigo
 }
 
 default_random_engine Simulador::generator; // inicialización de la variable static
