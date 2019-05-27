@@ -7,6 +7,9 @@ Tortuga::Tortuga()
 	estado = inactiva;
 	posicion.first = 0;
 	posicion.second = 0;
+	std::default_random_engine generator;
+	std::normal_distribution<double> distribution(velocidadPromEst, desviacionEstVelocidad);
+	velocidad = distribution(generator);
 }
 
 Tortuga::Tortuga(double v, EstadoTortuga e, T_posicion p)
@@ -59,11 +62,23 @@ void Tortuga::asgEstado(EstadoTortuga ne)
 //Luego de generar ese tiempo estimado entonces la tortuga durante ese rato hace las acciones que vaya a realizar 
 //Se proponen dos formas: distribuir de forma uniforme le tiempo entre las diferentes acciones
 //generar valores random y que todos sumen el tiempo completo 
-
 void Tortuga::avanzar(int tic)
 {
-	//REVISAR				
-	posicion.second += velocidad * 16.6;
+	//REVISAR
 
-		
+	/*Iniciar tic de nacimiento*/
+	if (ticInicial == NULL)
+	{
+		ticInicial = tic;
+	}
+
+	/*Avanzar*/
+	posicion.second += (velocidad * 16.6);
+
+	/*Cambiar estado*/
+	std::default_random_engine generator;
+	std::normal_distribution<double> distribution(duracionPromedio, desviacionEstDuracion);
+	duracion = distribution(generator);
+
+
 }

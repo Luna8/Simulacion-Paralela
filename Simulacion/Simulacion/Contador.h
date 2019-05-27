@@ -42,7 +42,6 @@ private:
 	int tiempoEspera;
 	TipoContador tipo;
 };
-
 /*
 Contador::Contador()
 {

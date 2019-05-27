@@ -73,11 +73,18 @@ int main()
 	Simulador::random_logistic(0., 1.);*/
 
 	/*int cantidadSimulaciones;
+	int cantidadSimulaciones;
 	int tiempoSimulado;
 	int cantidadTortugas;
 	int cantidadHilos;
-	int ticks = tiempoSimulado * 60;
-	Simulador simulador = new Simulador(); //O "Simulador simulador;"?
+	int ticks; // = tiempoSimulado * 60;
+	Simulador simulador;
+
+	Contador contador;
+
+	ifstream arch_experimentos("experimentos.csv", ios::in);
+	if (!arch_experimentos)
+		cout << "No encuentra el archivo de datos" << endl;
 
 	/*1. Cargar y validar los datos del archivo “experimentos.csv”.*/
 	/*2. Cargar y validar los archivos de datos de entrada.*/
@@ -103,6 +110,23 @@ int main()
 	//Simulador simuladorP;
 	//simuladorP.inicializarArribada(0.5, 0.2);
 
+	vector< vector< double > > experimentos = lecturaDatosValidados< double >(arch_experimentos, simulador.stod_wrapper);
+	for (size_t i = 1; i < experimentos.size(); i++)
+	{
+		cantidadSimulaciones = experimentos[0][0];
+		tiempoSimulado = experimentos[0][2];
+		cantidadTortugas = experimentos[0][3];
+		ticks = tiempoSimulado * 60;
+		for (size_t j = 4; j < experimentos[0].size(); j++)
+		{
+			/*3. Ejecutar cada experimento indicado en el archivo “experimentos.csv”:*/
+			/*3.1 Asignar la instancia de Simulador con los datos de entrada.*/
+			/*3.2 Ejecutar la simulación invocando Simulador::simular(...).*/
+			cantidadHilos = experimentos[0][j];
+			simulador.cantidadHilos = cantidadHilos; //Agregar simulador.cantidadHilos
+			simulador.simular(ticks);
+		}
+	}
 }
 
 
@@ -132,3 +156,4 @@ vector< vector< double > > lecturaDatosValidados(string file)
 	return vd;
 }
 
+}
