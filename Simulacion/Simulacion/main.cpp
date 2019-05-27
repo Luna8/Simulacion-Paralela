@@ -14,10 +14,53 @@ using namespace std;
 std::default_random_engine generador; // generador de aleatorios
 std::uniform_real_distribution<double> random_uniform(0.0, 1.0); // distribución uniforme
 
+double stod_wrapper(string v) throw (invalid_argument, out_of_range) { return std::stod(v); }
+
+
+vector< vector< double > > lecturaDatosValidados(string file);
+
 
 int main()
 {
 
+	Simulador simulador;
+	//Lectura de archivos
+	
+	//ifstream d("C:\\Users\B26607\Documents\Simulacion-Paralela\archivos\terreno.csv", ios::in);
+	string file;
+	//Lectura terreno
+	file = "terreno.csv";
+	vector< vector< double > > vd;
+	ifstream d(file, ios::in);
+	vd = lecturaDatosValidados(file);
+	simulador.inicializarPlaya(vd);
+	
+	file = "cuadrantes.csv";
+	vector< vector< double > > vd;
+	ifstream d(file, ios::in);
+	vd = lecturaDatosValidados(file);
+	simulador.inicializarCuadrantes(vd);
+
+	file = "transectos_verticales.csv";
+	vector< vector< double > > vd;
+	ifstream d(file, ios::in);
+	vd = lecturaDatosValidados(file);
+	simulador.inicializarTransectosVerticales(vd);
+
+	file = "transecto_paralelo_berma.csv";
+	vector< vector< double > > vd;
+	ifstream d(file, ios::in);
+	vd = lecturaDatosValidados(file);
+	simulador.inicializarTransectoBerma(vd);
+
+	file = "comportamiento_tortugas.csv";
+	vector< vector< double > > vd;
+	ifstream d(file, ios::in);
+	vd = lecturaDatosValidados(file);
+	simulador.inicializarArribada(vd);
+
+	
+	/*
 	typedef std::chrono::high_resolution_clock t_clock;
 	t_clock::time_point beginning = t_clock::now();
 
@@ -27,7 +70,7 @@ int main()
 	unsigned semilla = lapso.count();
 	generador.seed(semilla);
 	// simulador.simular(tt, generador, random_uniform); con tt el total de tics que se van a simular
-	Simulador::random_logistic(0., 1.);
+	Simulador::random_logistic(0., 1.);*/
 
 	/*int cantidadSimulaciones;
 	int tiempoSimulado;
@@ -57,56 +100,35 @@ int main()
 			}
 		}
 	}*/
-	Simulador simuladorP;
-	simuladorP.inicializarArribada(0.5, 0.2);
+	//Simulador simuladorP;
+	//simuladorP.inicializarArribada(0.5, 0.2);
 
 }
 
-template < typename T, class F >
-vector< vector< double > >Simulador::lecturaDatosValidados(ifstream& archivo, F t) throw (invalid_argument, out_of_range)
+
+vector< vector< double > > lecturaDatosValidados(string file)
 {
+	Simulador simulador;
+	
 	/* lee el archivo dobles */
-	ifstream d(archivo, ios::in);
+	ifstream d(file, ios::in);
 	if (!d) {
 		cout << "no encuentra el archivo de datos" << endl;
+		
 	}
 	vector< vector< double > > vd;
 	try {
-		vd = cargarDatos< double >(d); // usa wrapper de stod
+		vd = simulador.cargarDatos< double >(d, stod_wrapper); // usa wrapper de stod
 	}
 	catch (exception e) {
 		cout << "valor invalido o fuera de limite" << endl;
 
+		/*for (auto f : vd)
+			for (auto x : f)
+				cout << x << ',' << endl;
+		cin.ignore();*/
+		
 	}
-	/*for (auto f : vd)
-		for (auto x : f)
-			cout << x << ',' << endl;
-	cin.ignore();*/
 	return vd;
 }
 
-template < typename T, class F >
-vector< vector< double > > Simulador::cargarDatos(ifstream& archivo, F t) throw (invalid_argument, out_of_range)
-{
-	vector< vector< T > > valores;
-	vector< T > linea_valores;
-	string linea;
-	while (getline(archivo, linea)) {
-		linea_valores.clear();
-		stringstream ss(linea);
-		string numero_S;
-		T numero_T;
-		while (getline(ss, numero_S, ',')) {
-			try {
-				numero_T = t(numero_S);
-			}
-			catch (exception e) {
-				throw e;
-			}
-			linea_valores.push_back(numero_T);
-		}
-		valores.push_back(linea_valores);
-	}
-	return valores;
-
-}
