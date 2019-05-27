@@ -16,16 +16,13 @@ std::uniform_real_distribution<double> random_uniform(0.0, 1.0); // distribución
 
 double stod_wrapper(string v) throw (invalid_argument, out_of_range) { return std::stod(v); }
 
-
 vector< vector< double > > lecturaDatosValidados(string file);
-
 
 int main()
 {
-
 	Simulador simulador;
 	//Lectura de archivos
-	
+
 	//ifstream d("C:\\Users\B26607\Documents\Simulacion-Paralela\archivos\terreno.csv", ios::in);
 	string file;
 	//Lectura terreno
@@ -34,7 +31,7 @@ int main()
 	ifstream d(file, ios::in);
 	vd = lecturaDatosValidados(file);
 	simulador.inicializarPlaya(vd);
-	
+
 	file = "cuadrantes.csv";
 	vector< vector< double > > vd;
 	ifstream d(file, ios::in);
@@ -59,7 +56,7 @@ int main()
 	vd = lecturaDatosValidados(file);
 	simulador.inicializarArribada(vd);
 
-	
+
 	/*
 	typedef std::chrono::high_resolution_clock t_clock;
 	t_clock::time_point beginning = t_clock::now();
@@ -110,7 +107,7 @@ int main()
 	//Simulador simuladorP;
 	//simuladorP.inicializarArribada(0.5, 0.2);
 
-	vector< vector< double > > experimentos = lecturaDatosValidados< double >(arch_experimentos, simulador.stod_wrapper);
+	/*vector< vector< double > > experimentos = lecturaDatosValidados< double >(arch_experimentos, simulador.stod_wrapper);
 	for (size_t i = 1; i < experimentos.size(); i++)
 	{
 		cantidadSimulaciones = experimentos[0][0];
@@ -119,26 +116,28 @@ int main()
 		ticks = tiempoSimulado * 60;
 		for (size_t j = 4; j < experimentos[0].size(); j++)
 		{
-			/*3. Ejecutar cada experimento indicado en el archivo “experimentos.csv”:*/
-			/*3.1 Asignar la instancia de Simulador con los datos de entrada.*/
-			/*3.2 Ejecutar la simulación invocando Simulador::simular(...).*/
+			//*3. Ejecutar cada experimento indicado en el archivo “experimentos.csv”:
+			//*3.1 Asignar la instancia de Simulador con los datos de entrada.
+			//*3.2 Ejecutar la simulación invocando Simulador::simular(...).
 			cantidadHilos = experimentos[0][j];
-			simulador.cantidadHilos = cantidadHilos; //Agregar simulador.cantidadHilos
-			simulador.simular(ticks);
+				simulador.cantidadHilos = cantidadHilos; //Agregar simulador.cantidadHilos
+				simulador.simular(ticks);
+			}
 		}
-	}
+	}*/
+	//Simulador simuladorP;
+	//simuladorP.inicializarArribada(0.5, 0.2);
 }
-
 
 vector< vector< double > > lecturaDatosValidados(string file)
 {
 	Simulador simulador;
-	
+
 	/* lee el archivo dobles */
 	ifstream d(file, ios::in);
 	if (!d) {
 		cout << "no encuentra el archivo de datos" << endl;
-		
+
 	}
 	vector< vector< double > > vd;
 	try {
@@ -151,9 +150,6 @@ vector< vector< double > > lecturaDatosValidados(string file)
 			for (auto x : f)
 				cout << x << ',' << endl;
 		cin.ignore();*/
-		
 	}
 	return vd;
-}
-
 }
