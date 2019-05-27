@@ -66,19 +66,25 @@ void Tortuga::avanzar(int tic)
 {
 	//REVISAR
 
-	/*Iniciar tic de nacimiento*/
+	//Iniciar tic de nacimiento
 	if (ticInicial == NULL)
 	{
 		ticInicial = tic;
 	}
 
-	/*Avanzar*/
+	//Avanzar
 	posicion.second += (velocidad * 16.6);
 
-	/*Cambiar estado*/
+	//Cambiar estado
 	std::default_random_engine generator;
 	std::normal_distribution<double> distribution(duracionPromedio, desviacionEstDuracion);
 	duracion = distribution(generator);
-
+	double ticEtapa = (duracion / 7);
+	vector<EstadoTortuga> vectorEstados = { vagar, camar, excavar, poner, tapar, camuflar, inactiva };
+	if (tic - ticInicial >= (ticEtapa))
+	{
+		//estado = vectorEstados[++];
+		ticEtapa += ticEtapa;
+	}
 
 }
