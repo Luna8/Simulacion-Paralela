@@ -244,11 +244,24 @@ void Simulador::inicializarMarea(vector< vector< double > >marea)
 
 void Simulador::simular(int total_tics)
 {
+	for (int i = 0; i < total_tics; i++)
+	{
+		for (int t = 0; t < total_tics; t++)
+		{
+			vectorTortugas[t].avanzar(i);
+		}
+
+		for (int c = 0; c < total_tics; c++)
+		{
+			//Según el tipo, la cantidad, y la posición en el vector de cada contador; Contar()
+		}
+	}
 	/*
 	For paralelizado en donde el i son cada tic durante las 6 horas (?)
 	Debe trabajar con inicializarArribada y inicializarMarea ya que estas trabajan cada tic (?)
 	Le pasa los i (tics) a Avanzar de Tortuga y Contador, además de inicializarMarea (?)
 	*/
+
 	//PARALELIZACIÓN
 /* Hay diferentes formas de paralelizar
 	Hsay que encontrar la cantidad de tortugas que hay en una zona en cada tic
