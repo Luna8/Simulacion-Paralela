@@ -262,6 +262,13 @@ void Simulador::simular(int total_tics)
 	Le pasa los i (tics) a Avanzar de Tortuga y Contador, además de inicializarMarea (?)
 	*/
 
+	/**Inicio Contadores de Transecto Paralelo a la Berma.**/
+	Contador::TipoContador tipoHorizontal = Contador::horizontal;
+	vectorContadores[0].asgTipoContador(tipoHorizontal); //Hace al contador en la posicion 0 de tipo Horizontal
+	Contador::T_posicion pos = make_pair(0, 0);
+	vectorContadores[0].asgPosicion(pos);
+	/**Final Contadores de Transecto Paralelo a la Berma.**/
+
 	//PARALELIZACIÓN
 /* Hay diferentes formas de paralelizar
 	Hsay que encontrar la cantidad de tortugas que hay en una zona en cada tic
