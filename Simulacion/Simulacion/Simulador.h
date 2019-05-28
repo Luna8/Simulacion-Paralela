@@ -18,19 +18,19 @@ public:
 	Simulador();
 	~Simulador();
 
-	/* FUNCI”N STATIC PARA LA DISTRIBUCI”N LOGÕSTICA A USAR EN LA DISTRIBUCI”N TEMPORAL DE LA ARRIBADA */
+	/* FUNCI√ìN STATIC PARA LA DISTRIBUCI√ìN LOG√çSTICA A USAR EN LA DISTRIBUCI√ìN TEMPORAL DE LA ARRIBADA */
 	// REQ: ( location >= 0.0 ) && ( scale > 0.0).
-	// EFE: retorna un valor entre 0.0 y 1.0 que representa una probabilidad basada en la distribuciÛn logÌstica.
+	// EFE: retorna un valor entre 0.0 y 1.0 que representa una probabilidad basada en la distribuci√≥n log√≠stica.
 	static double random_logistic(double location, double scale);
 
-	// Objeto compartido que genera los n˙meros al azar
+	// Objeto compartido que genera los n√∫meros al azar
 	static default_random_engine generator;
 
-	// Objeto compartido que genera n˙meros entre 0.0 y 1.0 al azar seg˙n la distribuciÛn uniforme
+	// Objeto compartido que genera n√∫meros entre 0.0 y 1.0 al azar seg√∫n la distribuci√≥n uniforme
 	static uniform_real_distribution<double> random_uniform;
 
 	/* 
-	* INICIALIZADORES DE SIMULACI”N 
+	* INICIALIZADORES DE SIMULACI√ìN 
 	*/
 
 	// EFE:inicializa las secciones en que se divide la playa con los datos en el archivo.
@@ -48,41 +48,41 @@ public:
 	//		Crea e inicializa los contadores correspondientes.
 	void inicializarTransectoBerma(vector< vector< double > >transecto_paralelo_berma);
 
-	// EFE: crea la cantidad indicada de tortugas y las inicializa usando la distribuciÛn normal 
-	// con el promedio y desviaciÛn dados para la velocidad.
+	// EFE: crea la cantidad indicada de tortugas y las inicializa usando la distribuci√≥n normal 
+	// con el promedio y desviaci√≥n dados para la velocidad.
 	void inicializarTortugas(int cantidad_tortugas);
 
 	// EFE: distribuye la cantidad total de tortugas que arriban, minuto a minuto, durante 360 
-	// minutos o 6 horas, siguiendo la distribuciÛn logÌstica con par·metros u y s.
+	// minutos o 6 horas, siguiendo la distribuci√≥n log√≠stica con par√°metros u y s.
 	void inicializarArribada(vector< vector< double > >comportamiento_tortugas);
 
-	// EFE: guarda los par·metros de la funciÛn sinusoidal que se usa para generar la altura de la 
+	// EFE: guarda los par√°metros de la funci√≥n sinusoidal que se usa para generar la altura de la 
 	// marea minuto a minuto por 360 minutos o 6 horas.
 	// NOTA: se debe usar modelo sinusoidal con periodo en minutos.
 	void inicializarMarea(vector< vector< double > > marea);
 
 	// REQ: total_tics <= 360.
 	// EFE: simula el movimiento de las tortugas y el conteo de los contadores durante 6 horas.
-	// NOTA: la tarea de simular representada por este mÈtodo es la que debe paralelizarse usando hilos.
+	// NOTA: la tarea de simular representada por este m√©todo es la que debe paralelizarse usando hilos.
 	void simular(int total_tics);
 
 	/*
-	* OBTENEDORES DE RESULTADOS DE LA SIMULACI”N
+	* OBTENEDORES DE RESULTADOS DE LA SIMULACI√ìN
 	*/
 
-	// RET: total de tortugas que arribaron en la simulaciÛn.
+	// RET: total de tortugas que arribaron en la simulaci√≥n.
 	long obtTotalTortugasArribaron();
 
-	// RET: total de tortugas que anidaron en la simulaciÛn.
+	// RET: total de tortugas que anidaron en la simulaci√≥n.
 	long obtTotalTortugasAnidaron();
 
-	// RET: estimaciÛn del total de tortugas que anidaron con base en el mÈtodo de transectos sobre la berma.
+	// RET: estimaci√≥n del total de tortugas que anidaron con base en el m√©todo de transectos sobre la berma.
 	double obtEstimacionXtransectosSobreBerma();
 
-	// RET: estimaciÛn del total de tortugas que arribaron con base en el mÈtodo de transecto paralelo a la berma.
+	// RET: estimaci√≥n del total de tortugas que arribaron con base en el m√©todo de transecto paralelo a la berma.
 	double obtEstimacionXtransectoHorizontal();
 
-	// RET: estimaciÛn del total de tortugas que anidaron con base en el mÈtodo de cuadrantes.
+	// RET: estimaci√≥n del total de tortugas que anidaron con base en el m√©todo de cuadrantes.
 	double obtEstimacionXcuadrantes();
 
 	template < typename T, class F >
@@ -116,10 +116,10 @@ private:
 	double tapar;
 	double camuflar;
 	double velocidadPromEst; //Velocidad promedio estimada
-	double desviacionEstVelocidad; //desviaciÛn est·ndar de la velocidad
-	double sEscala; //Par·metro s (escala) para la distribuciÛn logÌstica de la arribada.
-	double duracionPromedio; //DuraciÛn promedio de minutos desde ìcamarî hasta ìcamuflarî
-	double desviacionEstDuracion; //DesviaciÛn est·ndar de la duraciÛn promedio entre ìcamarî y ìcamuflarî
+	double desviacionEstVelocidad; //desviaci√≥n est√°ndar de la velocidad
+	double sEscala; //Par√°metro s (escala) para la distribuci√≥n log√≠stica de la arribada.
+	double duracionPromedio; //Duraci√≥n promedio de minutos desde ‚Äúcamar‚Äù hasta ‚Äúcamuflar‚Äù
+	double desviacionEstDuracion; //Desviaci√≥n est√°ndar de la duraci√≥n promedio entre ‚Äúcamar‚Äù y ‚Äúcamuflar‚Äù
 	double baja;
 	double alta;
 	double tiempo;
@@ -140,7 +140,7 @@ void Simulador::inicializarPlaya(vector< vector< double > > arch_secciones)
 {
 	
 	// Estructura: vector de vectores cuyas filas son las secciones y las columnas
-		//tienen la siguiente informaciÛn:
+		//tienen la siguiente informaci√≥n:
 	
 
 		//C2: Distancia del nivel de marea media a la berma en metros
@@ -160,7 +160,7 @@ void Simulador::inicializarPlaya(vector< vector< double > > arch_secciones)
 
 void Simulador::inicializarCuadrantes(vector< vector< double > >arch_cuadrantes)
 {
-	//Cada posicion del vector cuadrantes contiene la informaciÛn de un cuadrante
+	//Cada posicion del vector cuadrantes contiene la informaci√≥n de un cuadrante
 	//X II
 	//Y II
 	//X SD
@@ -216,14 +216,14 @@ void Simulador::inicializarArribada(vector< vector< double > >comportamiento_tor
 	tapar = tortugas[0][4];
 	camuflar = tortugas[0][5];
 	velocidadPromEst = tortugas[0][6]; //Velocidad promedio estimada
-	desviacionEstVelocidad = tortugas[0][7]; //desviaciÛn est·ndar de la velocidad
-	sEscala = tortugas[0][8]; //Par·metro s (escala) para la distribuciÛn logÌstica de la arribada.
-	duracionPromedio = tortugas[0][9]; //DuraciÛn promedio de minutos desde ìcamarî hasta ìcamuflarî
-	desviacionEstDuracion = tortugas[0][10]; //DesviaciÛn est·ndar de la duraciÛn promedio entre ìcamarî y ìcamuflarî
-	//El par·metro u (mi) debe ser igual a cero
+	desviacionEstVelocidad = tortugas[0][7]; //desviaci√≥n est√°ndar de la velocidad
+	sEscala = tortugas[0][8]; //Par√°metro s (escala) para la distribuci√≥n log√≠stica de la arribada.
+	duracionPromedio = tortugas[0][9]; //Duraci√≥n promedio de minutos desde ‚Äúcamar‚Äù hasta ‚Äúcamuflar‚Äù
+	desviacionEstDuracion = tortugas[0][10]; //Desviaci√≥n est√°ndar de la duraci√≥n promedio entre ‚Äúcamar‚Äù y ‚Äúcamuflar‚Äù
+	//El par√°metro u (mi) debe ser igual a cero
 
 	//Almacenamiento de tortugas: Vector, Lista, Diccionario???
-	//Vamos a seleccionar un vector cuyo Ìndice va a ser su "id"
+	//Vamos a seleccionar un vector cuyo √≠ndice va a ser su "id"
 
 	//Inicializar vector con cantidad adecuada;
 
@@ -242,17 +242,17 @@ void Simulador::inicializarArribada(vector< vector< double > >comportamiento_tor
 //-------------------------------------------
 	//std::default_random_engine generator;
 	//std::uniform_real_distribution<double> random_uniform(0.0, 1.0);
-	//Entre lÌnea de la marea baja y lÌnea de marea en el tic en que est· entrando la tortuga a la playa
+	//Entre l√≠nea de la marea baja y l√≠nea de marea en el tic en que est√° entrando la tortuga a la playa
 	//std::uniform_real_distribution<double> distributionP(0.0, 1.0);
 
 
-	/*vector<T> vectorArribada; Global (?) Contiene X y Y de tortugas, adem·s del tic en que aparece (?)
+	/*vector<T> vectorArribada; Global (?) Contiene X y Y de tortugas, adem√°s del tic en que aparece (?)
 	vectorArribada[0] = posicionX
 	vectorArribada[1] = posicionY
 	vectorArribada[2] = ticAparicion*/
 
 	/*for (int i = 0; i < cantidadTortugas; i++) {
-		//vectorTortugas[i] = distribucionLogistica(); //En el caso que la funciÛn de las posiciones y el tic de apariciÛn
+		//vectorTortugas[i] = distribucionLogistica(); //En el caso que la funci√≥n de las posiciones y el tic de aparici√≥n
 		double  randomTic = Aleatorizador::random_logistic(u, s);
 
 	}*/
@@ -274,7 +274,7 @@ void Simulador::simular(int total_tics)
 {
 	for (int i = 0; i < total_tics; i++)
 	{
-		//Primero vamos a simular la marea en cada tic definiendo asÌ la lÌnea de la marea baja
+		//Primero vamos a simular la marea en cada tic definiendo as√≠ la l√≠nea de la marea baja
 		//y la de la marea alta en cada tic 
 		double p = (alta - baja) / tiempo;
 		double c = baja;
@@ -283,81 +283,105 @@ void Simulador::simular(int total_tics)
 
 		
 		//Luego inicializamos las tortugas que corresponan en este tic, para ello
-		//revisamos el valor correspondiente en la distribuci logÌstica para este tic
-		//y esa cantidad la creamos, para cada tortuga generamos con la distribuciÛn 
-		//uniforme la ubicaciÛn(coordenadas x y y) y la ubicamos en el sector correspondiente, 
-		//seg˙n el sector en el que est· vamos a meterla en el vector de tortugas por secciÛn
+		//revisamos el valor correspondiente en la distribuci log√≠stica para este tic
+		//y esa cantidad la creamos, para cada tortuga generamos con la distribuci√≥n 
+		//uniforme la ubicaci√≥n(coordenadas x y y) y la ubicamos en el sector correspondiente, 
+		//seg√∫n el sector en el que est√° vamos a meterla en el vector de tortugas por secci√≥n
+		
+	//FALTA
+		//Luego se debe avanzar a as tortugas que ya se encuentran en camino
+		//Seguido de eso se debe mover al contador paralelo
 		
 
-		cout << cantidad << endl;
+	/**Inicio Contador de Transecto Paralelo a la Berma.**/
+	Contador::TipoContador tipoHorizontal = Contador::horizontal;
+	vectorContadores[0].asgTipoContador(tipoHorizontal); //Contador en la posicion 0 de tipo Horizontal
+	int xActual = 0;
+	Contador::T_posicion pos = make_pair(xActual, 0);
+	vectorContadores[0].asgPosicion(pos);
+	int seccionActual = 0;
+	int posicionActualTort;
+	bool noEsta;
+	bool contando = true;
+	do {
+		xActual = 0;
+		pos = make_pair(xActual, 0);
+		vectorContadores[0].asgPosicion(pos);
+		seccionActual = 0;
+		posicionActualTort;
+		for (int i = 0; i < tortugasPorSeccion.size; i++)
+		{
+			noEsta = true;
+			cantTortParalelo = 0;
+			posicionActualTort = tortugasPorSeccion[seccionActual][i].obtPosicion.second;
+			for (int j = 0; j < tortugasContadasSec.size; j++)
+			{
+				if (tortugasContadasSec[seccionActual][j].obtId == tortugasPorSeccion[seccionActual][i].obtId)
+				{
+					noEsta = false;
+				}
+			}
+			if (posicionActualTort > (pos.second - anchoParalelo / 2) && posicionActualTort < (pos.second + anchoParalelo / 2) && !noEsta)
+			{
+				cantTortParalelo++;
+				tortugasContadasSec[seccionActual].push_back(tortugasPorSeccion[seccionActual][i]);
+			}
+			seccionActual++;
+		}
+		pos = make_pair(xActual + 100, 0);
+		vectorContadores[0].asgPosicion(pos);
+		if (xActual > 750)
+		{
+			contando = false;
+		}
+	} while (contando);
+	/**Final Contador de Transecto Paralelo a la Berma.**/
+
+	//Y finalmente aqu√≠ se debe contar la cantidad de tortugas vista por cada contador en los diferentes m√©todos
+		
+	//La idea era paralelizar por secciones, se iba a contar con un vector que conten√≠a la informaci√≥n de cada secci√≥n y un vector de
+	// tortugas asociado a esa secci√≥n, por lo que cada hilo revisar√≠a solo esas tortugas en cada secci√≥n en cada iteraci√≥n.
+		
 	}
-
-	//Por tic se debe:
-
-
-	/*
-	For paralelizado en donde el i son cada tic durante las 6 horas (?)
-	Debe trabajar con inicializarArribada y inicializarMarea ya que estas trabajan cada tic (?)
-	Le pasa los i (tics) a Avanzar de Tortuga y Contador, adem·s de inicializarMarea (?)
-	*/
-	//PARALELIZACI”N
-/* Hay diferentes formas de paralelizar
-	Hsay que encontrar la cantidad de tortugas que hay en una zona en cada tic
-	esto es lo que hay que optimizar sin el inconveniente de la matriz playa
-	En cada sector controlar las tortugas de ese sector
-	Hay que mover las tortugas, tienen que haer hiloscontrolandolas
-	pero hay que distribuir las tortugas entre los hilos correctamente
-	Es m·s f·cil que cada tortuga pregunte solo a las de su sector si est·n en la misma pisicion
-	Paralelizar poniendo al menos un hilo por sector
-	Dividir hilos por sector y que un hilo se encargue de las tortugas de un sector
-	CONTEO
-	Forma en que recuperamos la cantidad de tortugas tiene que ser de forma eficiente
-	Dividir hilos de tortugas de hilos de contadores
-	Sabemos desde el inicio si la tortuga cayÛ en uno de los sectores en los que se cuenta o no
-	entonces solo se deben contemplar esas tortugas.
-
-	//
-
-	Notas 13.05.19
-	Asignar hilos a sectores
-	Vamos a trabajar de 16 hilos en adelante. En el caso de 16 serÌan 15 para los sectores y 1 para el contador paralelo
-	32: 2 hilos por sector, 1 al paralelo, 1 sin nada
-	64: 4 por sector, 1 paralelo, 3 sin nada
-	Se pueden partir los sectores en partes seg˙n la cantidad de hilos
-	Considerar una clase Ssector
-	Recordar dividir tortugas por sector desde que nacen
-	En cada ciclo puede ser que primero tortugas se mueven y luego los contadores cuentan
-
-*/
 }
 
-long Simulador::obtTotalTortugasArribaron()
+long Simulador::obtTotalTortugasArribaron(int nc, int i, int m)
 {
-	return 0;  // agregue su propio codigo
+	long totalTortugasArribaron;
+	totalTortugasArribaron = nc * i / (4.2 * m);
+	return totalTortugasArribaron;  // agregue su propio codigo
 }
 
-long Simulador::obtTotalTortugasAnidaron()
+long Simulador::obtTotalTortugasAnidaron(double a, int d, int w, int m, int slj, int no, double prto)
 {
-	return 0; // agregue su propio codigo
+	long totalTortugasAnidaron;
+	totalTortugasAnidaron = (a * d / (2 * w * m * slj) * (no / prto));
+	return totalTortugasAnidaron; // agregue su propio codigo
 }
 
-double Simulador::obtEstimacionXtransectosSobreBerma()
+double Simulador::obtEstimacionXtransectosSobreBerma(int noc, int ne, int nv, double ac, int aci, int d, int m)
 {
-	return 0.0; // agregue su propio codigo
+	double estimacionXtransectosSobreBerma;
+	estimacionXtransectosSobreBerma = ((noc + 0.94 * ne + 0.47 * nv) * 2.25 * (ac / aci) * ((d / 60) / 64.8 * m));
+	return estimacionXtransectosSobreBerma; // agregue su propio codigo
 }
 
-double Simulador::obtEstimacionXtransectoHorizontal()
+double Simulador::obtEstimacionXtransectoHorizontal(int noc, int ne, int nv, double ac, int aci, int d, int m)
 {
-	return 0.0; // agregue su propio codigo
+	double estimacionXtransectoHorizontal;
+	estimacionXtransectoHorizontal = ((noc + 0.94 * ne + 0.47 * nv) * 2.25 * (ac / aci) * ((d / 60) / 64.8 * m));
+	return estimacionXtransectoHorizontal; // agregue su propio codigo
 }
 
-double Simulador::obtEstimacionXcuadrantes()
+double Simulador::obtEstimacionXcuadrantes(int noc, int ne, int nv, double ac, int aci, int d, int m)
 {
-	return 0.0; // agregue su propio codigo
+	double estimacionXcuadrantes;
+	estimacionXcuadrantes = ((noc + 0.94 * ne + 0.47 * nv) * 2.25 * (ac / aci) * ((d / 60) / 64.8 * m));
+	return estimacionXcuadrantes; // agregue su propio codigo
 }
 
-default_random_engine Simulador::generator; // inicializaciÛn de la variable static
-uniform_real_distribution<double> Simulador::random_uniform(0.0, 1.0); // inicializaciÛn de la variable static
+default_random_engine Simulador::generator; // inicializaci√≥n de la variable static
+uniform_real_distribution<double> Simulador::random_uniform(0.0, 1.0); // inicializaci√≥n de la variable static
 double Simulador::random_logistic(double location, double scale)
 {
 	assert(scale > 0.);
@@ -391,3 +415,36 @@ vector< vector< double > > Simulador::cargarDatos(ifstream& archivo, F t) throw 
 	return valores;
 
 }
+
+/* COMENTARIOS VARIOS
+	For paralelizado en donde el i son cada tic durante las 6 horas (?)
+	Debe trabajar con inicializarArribada y inicializarMarea ya que estas trabajan cada tic (?)
+	Le pasa los i (tics) a Avanzar de Tortuga y Contador, adem√°s de inicializarMarea (?)
+	*/
+	//PARALELIZACI√ìN
+/* Hay diferentes formas de paralelizar
+	Hsay que encontrar la cantidad de tortugas que hay en una zona en cada tic
+	esto es lo que hay que optimizar sin el inconveniente de la matriz playa
+	En cada sector controlar las tortugas de ese sector
+	Hay que mover las tortugas, tienen que haer hiloscontrolandolas
+	pero hay que distribuir las tortugas entre los hilos correctamente
+	Es m√°s f√°cil que cada tortuga pregunte solo a las de su sector si est√°n en la misma pisicion
+	Paralelizar poniendo al menos un hilo por sector
+	Dividir hilos por sector y que un hilo se encargue de las tortugas de un sector
+	CONTEO
+	Forma en que recuperamos la cantidad de tortugas tiene que ser de forma eficiente
+	Dividir hilos de tortugas de hilos de contadores
+	Sabemos desde el inicio si la tortuga cay√≥ en uno de los sectores en los que se cuenta o no
+	entonces solo se deben contemplar esas tortugas.
+
+	//
+
+	Notas 13.05.19
+	Asignar hilos a sectores
+	Vamos a trabajar de 16 hilos en adelante. En el caso de 16 ser√≠an 15 para los sectores y 1 para el contador paralelo
+	32: 2 hilos por sector, 1 al paralelo, 1 sin nada
+	64: 4 por sector, 1 paralelo, 3 sin nada
+	Se pueden partir los sectores en partes seg√∫n la cantidad de hilos
+	Considerar una clase Ssector
+	Recordar dividir tortugas por sector desde que nacen
+	En cada ciclo puede ser que primero tortugas se mueven y luego los contadores cuentan
