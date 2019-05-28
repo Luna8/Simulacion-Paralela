@@ -1,3 +1,9 @@
+/*******************************
+Integrantes:
+Ana Cristina Soto Rojas - ______
+Allen Ramírez Ramírez   - B25448
+*******************************/
+
 //#include "pch.h"
 #include <chrono>
 #include <iostream>

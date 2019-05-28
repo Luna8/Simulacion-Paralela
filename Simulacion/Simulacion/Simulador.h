@@ -266,16 +266,21 @@ void Simulador::simular(int total_tics)
 	*/
 
 	/**Inicio Contador de Transecto Paralelo a la Berma.**/
+	Contador::TipoContador tipoHorizontal = Contador::horizontal;
+	vectorContadores[0].asgTipoContador(tipoHorizontal); //Contador en la posicion 0 de tipo Horizontal
+	int xActual = 0;
+	Contador::T_posicion pos = make_pair(xActual, 0);
+	vectorContadores[0].asgPosicion(pos);
+	int seccionActual = 0;
+	int posicionActualTort;
+	bool noEsta;
 	bool contando = true;
 	do {
-		Contador::TipoContador tipoHorizontal = Contador::horizontal;
-		vectorContadores[0].asgTipoContador(tipoHorizontal); //Contador en la posicion 0 de tipo Horizontal
-		int xActual = 0;
-		Contador::T_posicion pos = make_pair(xActual, 0);
+		xActual = 0;
+		pos = make_pair(xActual, 0);
 		vectorContadores[0].asgPosicion(pos);
-		int seccionActual = 0;
-		int posicionActualTort;
-		bool noEsta;
+		seccionActual = 0;
+		posicionActualTort;
 		for (int i = 0; i < tortugasPorSeccion.size; i++)
 		{
 			noEsta = true;
@@ -293,6 +298,7 @@ void Simulador::simular(int total_tics)
 				cantTortParalelo++;
 				tortugasContadasSec[seccionActual].push_back(tortugasPorSeccion[seccionActual][i]);
 			}
+			seccionActual++;
 		}
 		pos = make_pair(xActual + 100, 0);
 		vectorContadores[0].asgPosicion(pos);

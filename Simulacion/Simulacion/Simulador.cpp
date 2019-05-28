@@ -1,5 +1,7 @@
 #include "Simulador.h"
 
+/*Tomar en cuenta sólo el Simulador.h, ya que es el que contiene los métodos correctos y actualizados.*/
+
 Simulador::Simulador()
 {
 }
