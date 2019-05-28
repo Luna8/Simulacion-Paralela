@@ -92,6 +92,7 @@ public:
 	vector< vector< double > > cuadrantes;
 	vector<Tortuga> vectorTortugas;
 	vector<Contador> vectorContadores;
+	vector<vector<Tortuga>> tortugaXSeccion;
 
 	double stod_wrapper(string v) throw (invalid_argument, out_of_range) { return std::stod(v); }
 
@@ -108,6 +109,21 @@ private:
 	int rangoVision;
 	int anchoParalelo;
 	int largoParalelo;
+	double vagar;
+	double camar;
+	double excavar;
+	double poner;
+	double tapar;
+	double camuflar;
+	double velocidadPromEst; //Velocidad promedio estimada
+	double desviacionEstVelocidad; //desviación estándar de la velocidad
+	double sEscala; //Parámetro s (escala) para la distribución logística de la arribada.
+	double duracionPromedio; //Duración promedio de minutos desde “camar” hasta “camuflar”
+	double desviacionEstDuracion; //Desviación estándar de la duración promedio entre “camar” y “camuflar”
+	double baja;
+	double alta;
+	double tiempo;
+
 
 };
 
@@ -125,7 +141,8 @@ void Simulador::inicializarPlaya(vector< vector< double > > arch_secciones)
 	
 	// Estructura: vector de vectores cuyas filas son las secciones y las columnas
 		//tienen la siguiente información:
-		//C1: Posición inicial en x
+	
+
 		//C2: Distancia del nivel de marea media a la berma en metros
 		//C3: Altura de la berma respecto del nivel de marea media
 		//C4: Distancia de la berma a las dunas en metros
@@ -179,23 +196,30 @@ void Simulador::inicializarTransectoBerma(vector< vector< double > >transecto_pa
 
 void Simulador::inicializarTortugas(int cantidad_tortugas)
 {
+	double cantidad = random_logistic(0.0, sEscala);
+	std::default_random_engine generator;
+	//std::normal_distribution<double> distribucionNormal(velocidadPromEst, desviacionEstVelocidad);
+
+	//double number = distribucionNormal(generator);
+	double velocidadT;
+
 }
 
 void Simulador::inicializarArribada(vector< vector< double > >comportamiento_tortugas)
 {
 	//Inicializar valores del vector tortugas desde el archivo "comportamiento_tortugas"
 	vector<vector< double > > tortugas = comportamiento_tortugas;
-	double vagar = tortugas[0][0];
-	double camar = tortugas[0][1];
-	double excavar = tortugas[0][2];
-	double poner = tortugas[0][3];
-	double tapar = tortugas[0][4];
-	double camuflar = tortugas[0][5];
-	double velocidadPromEst = tortugas[0][6]; //Velocidad promedio estimada
-	double desviacionEstVelocidad = tortugas[0][8]; //desviación estándar de la velocidad
-	double sEscala = tortugas[0][9]; //Parámetro s (escala) para la distribución logística de la arribada.
-	double duracionPromedio = tortugas[0][10]; //Duración promedio de minutos desde “camar” hasta “camuflar”
-	double desviacionEstDuracion = tortugas[0][11]; //Desviación estándar de la duración promedio entre “camar” y “camuflar”
+	vagar = tortugas[0][0];
+	camar = tortugas[0][1];
+	excavar = tortugas[0][2];
+	poner = tortugas[0][3];
+	tapar = tortugas[0][4];
+	camuflar = tortugas[0][5];
+	velocidadPromEst = tortugas[0][6]; //Velocidad promedio estimada
+	desviacionEstVelocidad = tortugas[0][7]; //desviación estándar de la velocidad
+	sEscala = tortugas[0][8]; //Parámetro s (escala) para la distribución logística de la arribada.
+	duracionPromedio = tortugas[0][9]; //Duración promedio de minutos desde “camar” hasta “camuflar”
+	desviacionEstDuracion = tortugas[0][10]; //Desviación estándar de la duración promedio entre “camar” y “camuflar”
 	//El parámetro u (mi) debe ser igual a cero
 
 	//Almacenamiento de tortugas: Vector, Lista, Diccionario???
@@ -216,10 +240,10 @@ void Simulador::inicializarArribada(vector< vector< double > >comportamiento_tor
 		//	vectorTortugas[i].asgVelocidad(velocidadT);
 	}
 //-------------------------------------------
-	std::default_random_engine generator;
-	std::uniform_real_distribution<double> random_uniform(0.0, 1.0);
+	//std::default_random_engine generator;
+	//std::uniform_real_distribution<double> random_uniform(0.0, 1.0);
 	//Entre línea de la marea baja y línea de marea en el tic en que está entrando la tortuga a la playa
-	std::uniform_real_distribution<double> distributionP(0.0, 1.0);
+	//std::uniform_real_distribution<double> distributionP(0.0, 1.0);
 
 
 	/*vector<T> vectorArribada; Global (?) Contiene X y Y de tortugas, además del tic en que aparece (?)
@@ -240,10 +264,37 @@ void Simulador::inicializarArribada(vector< vector< double > >comportamiento_tor
 
 void Simulador::inicializarMarea(vector< vector< double > >marea)
 {
+	baja = marea[0][0];
+	alta = marea[0][1];
+	tiempo = marea[0][2];
+
 }
 
 void Simulador::simular(int total_tics)
 {
+	for (int i = 0; i < total_tics; i++)
+	{
+		//Primero vamos a simular la marea en cada tic definiendo así la línea de la marea baja
+		//y la de la marea alta en cada tic 
+		double p = (alta - baja) / tiempo;
+		double c = baja;
+		double altura = p * i + c;
+		//cout << altura << endl;
+
+		
+		//Luego inicializamos las tortugas que corresponan en este tic, para ello
+		//revisamos el valor correspondiente en la distribuci logística para este tic
+		//y esa cantidad la creamos, para cada tortuga generamos con la distribución 
+		//uniforme la ubicación(coordenadas x y y) y la ubicamos en el sector correspondiente, 
+		//según el sector en el que está vamos a meterla en el vector de tortugas por sección
+		
+
+		cout << cantidad << endl;
+	}
+
+	//Por tic se debe:
+
+
 	/*
 	For paralelizado en donde el i son cada tic durante las 6 horas (?)
 	Debe trabajar con inicializarArribada y inicializarMarea ya que estas trabajan cada tic (?)

@@ -31,34 +31,39 @@ int main()
 	//Lectura terreno
 	file = "terreno.csv";
 	vector< vector< double > > vd;
-	ifstream d(file, ios::in);
 	vd = lecturaDatosValidados(file);
 	simulador.inicializarPlaya(vd);
 	
+	
+
 	file = "cuadrantes.csv";
-	vector< vector< double > > vd;
-	ifstream d(file, ios::in);
+	vd.clear();
 	vd = lecturaDatosValidados(file);
 	simulador.inicializarCuadrantes(vd);
 
 	file = "transectos_verticales.csv";
-	vector< vector< double > > vd;
-	ifstream d(file, ios::in);
+	vd.clear();
 	vd = lecturaDatosValidados(file);
 	simulador.inicializarTransectosVerticales(vd);
 
 	file = "transecto_paralelo_berma.csv";
-	vector< vector< double > > vd;
-	ifstream d(file, ios::in);
+	vd.clear();
 	vd = lecturaDatosValidados(file);
 	simulador.inicializarTransectoBerma(vd);
 
 	file = "comportamiento_tortugas.csv";
-	vector< vector< double > > vd;
-	ifstream d(file, ios::in);
+	vd.clear();
 	vd = lecturaDatosValidados(file);
 	simulador.inicializarArribada(vd);
 
+	file = "marea.csv";
+	vd.clear();
+	vd = lecturaDatosValidados(file);
+	simulador.inicializarMarea(vd);
+
+
+	simulador.simular(30);
+	int c = 0;
 	
 	/*
 	typedef std::chrono::high_resolution_clock t_clock;
