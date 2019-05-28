@@ -39,6 +39,11 @@ Tortuga::EstadoTortuga Tortuga::obtEstado()
 	return estado;
 }
 
+int Tortuga::obtId()
+{
+	return id;
+}
+
 void Tortuga::asgVelocidad(double nv)
 {
 	velocidad = nv;
@@ -55,6 +60,11 @@ void Tortuga::asgEstado(EstadoTortuga ne)
 	estado = ne;
 }
 
+void Tortuga::asgId(int i)
+{
+	id = i;
+}
+
 // EFE: avanza *this según su velocidad y evoluciona su estado en el tic que le toque.
 // En cada avance la tortuga debe avanzar en dirección a la berma.
 //Avanza, evalúa si 
@@ -66,19 +76,28 @@ void Tortuga::avanzar(int tic)
 {
 	//REVISAR
 
-	/*Iniciar tic de nacimiento*/
+	//Iniciar tic de nacimiento
 	if (ticInicial == NULL)
 	{
 		ticInicial = tic;
 	}
 
-	/*Avanzar*/
+	//Avanzar
 	posicion.second += (velocidad * 16.6);
 
-	/*Cambiar estado*/
+	//Cambiar estado
 	std::default_random_engine generator;
 	std::normal_distribution<double> distribution(duracionPromedio, desviacionEstDuracion);
 	duracion = distribution(generator);
-
+	double ticEtapa = (duracion / 7);
+	//vector<EstadoTortuga> vectorEstados = { vagar, camar, excavar, poner, tapar, camuflar, inactiva };
+	if (tic - ticInicial >= (ticEtapa))
+	{
+		if (estado != inactiva)
+		{
+			estado = static_cast<EstadoTortuga>(static_cast<int>(estado) + 1); //Cambia de estado
+		}
+		ticEtapa += ticEtapa;
+	}
 
 }
