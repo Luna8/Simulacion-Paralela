@@ -1,3 +1,8 @@
+//Proyecto realizado por
+//Allen Ram√≠rez Ram√≠rez B25448
+//Cristina Soto Rojas B26607
+
+
 //#include "pch.h"
 #include <chrono>
 #include <iostream>
@@ -12,7 +17,7 @@
 using namespace std;
 
 std::default_random_engine generador; // generador de aleatorios
-std::uniform_real_distribution<double> random_uniform(0.0, 1.0); // distribuciÛn uniforme
+std::uniform_real_distribution<double> random_uniform(0.0, 1.0); // distribuci√≥n uniforme
 
 double stod_wrapper(string v) throw (invalid_argument, out_of_range) { return std::stod(v); }
 
@@ -20,13 +25,19 @@ double stod_wrapper(string v) throw (invalid_argument, out_of_range) { return st
 vector< vector< double > > lecturaDatosValidados(string file);
 
 
+
+//OBSERVACI√ìN: A pesar del tiempo extra brindado, por diferentes motivos no logramos concluir a tiempo
+//con el proyecto, sin embargo adjuntamos lo realizado hasta el momento entendiendo las reglas establecidas 
+//para la evaluaci√≥n. 
+
+
 int main()
 {
 
 	Simulador simulador;
 	//Lectura de archivos
-	
-	//ifstream d("C:\\Users\B26607\Documents\Simulacion-Paralela\archivos\terreno.csv", ios::in);
+	//Se modificaron los par√°metros de las funciones para la lectura de datos.
+
 	string file;
 	//Lectura terreno
 	file = "terreno.csv";
@@ -61,15 +72,12 @@ int main()
 	vd = lecturaDatosValidados(file);
 	simulador.inicializarMarea(vd);
 
-
-	simulador.simular(30);
-	int c = 0;
 	
-	/*
+	
 	typedef std::chrono::high_resolution_clock t_clock;
 	t_clock::time_point beginning = t_clock::now();
 
-	//...su cÛdigo
+	simulador.simular(360);
 
 	t_clock::duration lapso = t_clock::now() - beginning;
 	unsigned semilla = lapso.count();
@@ -84,7 +92,7 @@ int main()
 	int ticks = tiempoSimulado * 60;
 	Simulador simulador = new Simulador(); //O "Simulador simulador;"?
 
-	/*1. Cargar y validar los datos del archivo ìexperimentos.csvî.*/
+	/*1. Cargar y validar los datos del archivo ‚Äúexperimentos.csv‚Äù.*/
 	/*2. Cargar y validar los archivos de datos de entrada.*/
 	/*bool lecturaCorrecta = validarDatos< vector< T > >(arch_experimentos);
 	if (lecturaCorrecta) {
@@ -96,9 +104,9 @@ int main()
 			cantidadTortugas = experimentos[0][3];
 			for (size_t j = 4; j < experimentos[0].size(); j++)
 			{
-				/*3. Ejecutar cada experimento indicado en el archivo ìexperimentos.csvî:*/
+				/*3. Ejecutar cada experimento indicado en el archivo ‚Äúexperimentos.csv‚Äù:*/
 				/*3.1 Asignar la instancia de Simulador con los datos de entrada.*/
-				/*3.2 Ejecutar la simulaciÛn invocando Simulador::simular(...).*/
+				/*3.2 Ejecutar la simulaci√≥n invocando Simulador::simular(...).*/
 	/*			cantidadHilos = experimentos[0][j];
 				simulador.cantidadHilos = cantidadHilos; //Agregar simulador.cantidadHilos
 				simulador.simular(ticks);
