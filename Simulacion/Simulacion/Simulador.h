@@ -265,36 +265,43 @@ void Simulador::simular(int total_tics)
 	Le pasa los i (tics) a Avanzar de Tortuga y Contador, además de inicializarMarea (?)
 	*/
 
-	/**Inicio Contadores de Transecto Paralelo a la Berma.**/
-	Contador::TipoContador tipoHorizontal = Contador::horizontal;
-	vectorContadores[0].asgTipoContador(tipoHorizontal); //Contador en la posicion 0 de tipo Horizontal
-	int xActual = 0;
-	Contador::T_posicion pos = make_pair(xActual, 0);
-	vectorContadores[0].asgPosicion(pos);
-	int seccionActual = 0;
-	int posicionActualTort;
-	bool noEsta;
-	for (int i = 0; i < tortugasPorSeccion.size; i++)
-	{
-		noEsta = true;
-		cantTortParalelo = 0;
-		posicionActualTort = tortugasPorSeccion[seccionActual][i].obtPosicion.second;
-		for (int j = 0; j < tortugasContadasSec.size; j++)
+	/**Inicio Contador de Transecto Paralelo a la Berma.**/
+	bool contando = true;
+	do {
+		Contador::TipoContador tipoHorizontal = Contador::horizontal;
+		vectorContadores[0].asgTipoContador(tipoHorizontal); //Contador en la posicion 0 de tipo Horizontal
+		int xActual = 0;
+		Contador::T_posicion pos = make_pair(xActual, 0);
+		vectorContadores[0].asgPosicion(pos);
+		int seccionActual = 0;
+		int posicionActualTort;
+		bool noEsta;
+		for (int i = 0; i < tortugasPorSeccion.size; i++)
 		{
-			if (tortugasContadasSec[seccionActual][j].obtId == tortugasPorSeccion[seccionActual][i].obtId)
+			noEsta = true;
+			cantTortParalelo = 0;
+			posicionActualTort = tortugasPorSeccion[seccionActual][i].obtPosicion.second;
+			for (int j = 0; j < tortugasContadasSec.size; j++)
 			{
-				noEsta = false;
+				if (tortugasContadasSec[seccionActual][j].obtId == tortugasPorSeccion[seccionActual][i].obtId)
+				{
+					noEsta = false;
+				}
+			}
+			if (posicionActualTort > (pos.second - anchoParalelo / 2) && posicionActualTort < (pos.second + anchoParalelo / 2) && !noEsta)
+			{
+				cantTortParalelo++;
+				tortugasContadasSec[seccionActual].push_back(tortugasPorSeccion[seccionActual][i]);
 			}
 		}
-		if (posicionActualTort > (pos.second - anchoParalelo / 2) && posicionActualTort < (pos.second + anchoParalelo / 2) && !noEsta)
+		pos = make_pair(xActual + 100, 0);
+		vectorContadores[0].asgPosicion(pos);
+		if (xActual > 750)
 		{
-			cantTortParalelo++;
-			tortugasContadasSec[seccionActual].push_back(tortugasPorSeccion[seccionActual][i]);
+			contando = false;
 		}
-	}
-	pos = make_pair(xActual+100, 0);
-	vectorContadores[0].asgPosicion(pos);
-	/**Final Contadores de Transecto Paralelo a la Berma.**/
+	} while (contando);
+	/**Final Contador de Transecto Paralelo a la Berma.**/
 
 	//PARALELIZACIÓN
 /* Hay diferentes formas de paralelizar
