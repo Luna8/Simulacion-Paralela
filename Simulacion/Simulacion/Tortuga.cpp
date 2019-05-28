@@ -80,10 +80,13 @@ void Tortuga::avanzar(int tic)
 	std::normal_distribution<double> distribution(duracionPromedio, desviacionEstDuracion);
 	duracion = distribution(generator);
 	double ticEtapa = (duracion / 7);
-	vector<EstadoTortuga> vectorEstados = { vagar, camar, excavar, poner, tapar, camuflar, inactiva };
+	//vector<EstadoTortuga> vectorEstados = { vagar, camar, excavar, poner, tapar, camuflar, inactiva };
 	if (tic - ticInicial >= (ticEtapa))
 	{
-		//estado = vectorEstados[++];
+		if (estado != inactiva)
+		{
+			estado = static_cast<EstadoTortuga>(static_cast<int>(estado) + 1); //Cambia de estado
+		}
 		ticEtapa += ticEtapa;
 	}
 
