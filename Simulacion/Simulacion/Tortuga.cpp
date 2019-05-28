@@ -39,6 +39,11 @@ Tortuga::EstadoTortuga Tortuga::obtEstado()
 	return estado;
 }
 
+int Tortuga::obtId()
+{
+	return id;
+}
+
 void Tortuga::asgVelocidad(double nv)
 {
 	velocidad = nv;
@@ -53,6 +58,11 @@ void Tortuga::asgPosicion(T_posicion np)
 void Tortuga::asgEstado(EstadoTortuga ne)
 {
 	estado = ne;
+}
+
+void Tortuga::asgId(int i)
+{
+	id = i;
 }
 
 // EFE: avanza *this según su velocidad y evoluciona su estado en el tic que le toque.

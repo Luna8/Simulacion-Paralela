@@ -92,6 +92,8 @@ public:
 	vector< vector< double > > cuadrantes;
 	vector<Tortuga> vectorTortugas;
 	vector<Contador> vectorContadores;
+	vector< vector< Tortuga > > tortugasPorSeccion; //Contadores de tortugas en cada sección
+	vector< vector< Tortuga > > tortugasContadasSec; //Tortugas ya contadas por sección
 
 	double stod_wrapper(string v) throw (invalid_argument, out_of_range) { return std::stod(v); }
 
@@ -104,6 +106,7 @@ private:
 	int cantidadContadoresV;
 	int cantidadContadoresC;
 	int cantidadTortugas;
+	int cantTortParalelo;
 	int tiempoParalelo;
 	int rangoVision;
 	int anchoParalelo;
@@ -264,8 +267,32 @@ void Simulador::simular(int total_tics)
 
 	/**Inicio Contadores de Transecto Paralelo a la Berma.**/
 	Contador::TipoContador tipoHorizontal = Contador::horizontal;
-	vectorContadores[0].asgTipoContador(tipoHorizontal); //Hace al contador en la posicion 0 de tipo Horizontal
-	Contador::T_posicion pos = make_pair(0, 0);
+	vectorContadores[0].asgTipoContador(tipoHorizontal); //Contador en la posicion 0 de tipo Horizontal
+	int xActual = 0;
+	Contador::T_posicion pos = make_pair(xActual, 0);
+	vectorContadores[0].asgPosicion(pos);
+	int seccionActual = 0;
+	int posicionActualTort;
+	bool noEsta;
+	for (int i = 0; i < tortugasPorSeccion.size; i++)
+	{
+		noEsta = true;
+		cantTortParalelo = 0;
+		posicionActualTort = tortugasPorSeccion[seccionActual][i].obtPosicion.second;
+		for (int j = 0; j < tortugasContadasSec.size; j++)
+		{
+			if (tortugasContadasSec[seccionActual][j].obtId == tortugasPorSeccion[seccionActual][i].obtId)
+			{
+				noEsta = false;
+			}
+		}
+		if (posicionActualTort > (pos.second - anchoParalelo / 2) && posicionActualTort < (pos.second + anchoParalelo / 2) && !noEsta)
+		{
+			cantTortParalelo++;
+			tortugasContadasSec[seccionActual].push_back(tortugasPorSeccion[seccionActual][i]);
+		}
+	}
+	pos = make_pair(xActual+100, 0);
 	vectorContadores[0].asgPosicion(pos);
 	/**Final Contadores de Transecto Paralelo a la Berma.**/
 

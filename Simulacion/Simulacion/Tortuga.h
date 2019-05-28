@@ -25,11 +25,13 @@ public:
 	double obtVelocidad();
 	T_posicion obtPosicion();
 	EstadoTortuga obtEstado();
+	int obtId();
 
 	// Asignadores:
 	void asgVelocidad(double nv);
 	void asgPosicion(T_posicion np);
 	void asgEstado(EstadoTortuga ne);
+	void asgId(int i);
 
 	// EFE: avanza *this según su velocidad y evoluciona su estado en el tic que le toque.
 	void avanzar(int tic);
@@ -47,6 +49,7 @@ private:
 	double desviacionEstDuracion; //Desviación estándar de la duración promedio entre “camar” y “camuflar”
 	double duracion; //Valor de duración de la tortuga para realizar las acciones, generado con distribución normal
 	int ticInicial; //Guarda el tic de nacimiento de la tortuga
+	int id;
 };
 
 /*
